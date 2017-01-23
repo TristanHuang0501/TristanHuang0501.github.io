@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "我的博客搭建记(Github+Jekyll)"
+title:      "我的博客搭建记"
 subtitle:   "Hello World, Hello Blog"
 date:       2017-01-23
 author:     "Tristan"
