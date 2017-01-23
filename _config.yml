@@ -70,7 +70,7 @@ ga_domain: 51tristan.top
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，看看书，<br>子路问津O(∩_∩)O"
+sidebar-about-description: "写写代码，看看书，<br>子路问津,上下求索"
 sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
