@@ -9,15 +9,14 @@ url: "http://51tristan.top"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
-
 # SNS settings
 RSS: false
 weibo_username:     huxpro
 zhihu_username:     huxpro
-github_username:    huxpro
+github_username:    TristanHuang0501
 #twitter_username:  huxpro
 facebook_username:  huxpro
-# linkedin_username:  firstname-lastname-idxxxx
+#linkedin_username:  firstname-lastname-idxxxx
 
 
 
