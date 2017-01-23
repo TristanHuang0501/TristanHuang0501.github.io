@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: TristanHuang0501@gmail.com
 description: "子路问津 | 黄美川, tirstanhuang | 这里是 @TristanHuang0501 黄美川 的个人博客，与你一起发现更大的世界。"
 keyword: "黄美川, tristanhuang, 黄美川的博客, tristan Blog, 博客, 个人网站, 互联网"
-url: "https://51tristan.top"              # your host, for absolute URL
+url: "http://51tristan.top"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
@@ -70,7 +70,7 @@ ga_domain: 51tristan.top
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，看看书，<br>子路问津,上下求索"
+sidebar-about-description: "写写代码，看书吉他，<br>子路问津，上下求索"
 sidebar-avatar: /img/tristan.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
