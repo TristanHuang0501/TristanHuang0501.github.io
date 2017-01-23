@@ -24,23 +24,8 @@ tags:
 ### 记录值得注意的地方
 - _post 文件夹中放用来发表的文章：
   - 文件名格式：`yyyy-mm-dd-post-name.md`或者`yyyy-mm-dd-post-name.markdown`
-  - 在开始写具体内容前，必须填写yaml头信息，这样该文件才能被Jekyll进行处理。头信息必须在文件的开始部分，并且按照yaml的格式，如本篇文章：
-  
-  ```
-  ---
-  layout:     post
-  title:      "我的博客搭建记(Github+Jekyll)"
-  subtitle:   " \"Hello World, Hello Blog\""
-  date:       2017-01-23 22:26:00
-  author:     "Tristan"
-  header-img: "img/post-bg-unix-linux.jpg"
-  catalog: true
-  tags:
-      - 操作流
-  ---
-  ```
-
-
+  - 在开始写具体内容前，必须填写yaml头信息，这样该文件才能被Jekyll进行处理。头信息必须在文件的开始部分，并且按照yaml的格式
+ 
 - 本地访问博客
   - 在终端中cd到博客主目录，输入`jekyll serve`，这样会在`_site`中生成一系列的网站的文件并且启动服务，这时在浏览器中访问`localhost:4000`就能本地访问自己博客。
 
