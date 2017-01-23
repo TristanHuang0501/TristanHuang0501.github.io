@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "我的博客搭建记"
-subtitle:   "Hello World, Hello Blog"
+subtitle:   "\"Hello World, Hello Blog\""
 date:       2017-01-24
 author:     "Tristan"
 header-img: "img/post-bg-unix-linux.jpg"
