@@ -31,16 +31,16 @@ tags:
   ```
   ---
   layout:     post
-  title:      "我的博客搭建记(Github+Jekyll)"
-  subtitle:   " \"Hello World, Hello Blog\""
-  date:       2017-01-23 22:26:00
-  author:     "Tristan"
+  title:      "我的博客搭建记"
+  subtitle:   Hello World, Hello Blog
+  date:       2017-01-24
+  author:     "Tristan"
   header-img: "img/post-bg-unix-linux.jpg"
-  catalog: true
+  catalog:    true
   tags:
   - 操作流
-  - 日志
-  ---
+  - 日志
+  ---
   ```
 
 
