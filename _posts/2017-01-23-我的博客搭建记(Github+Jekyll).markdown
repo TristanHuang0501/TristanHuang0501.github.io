@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      "我的博客搭建记(Github+Jekyll)"
-subtitle:   " \"Hello World, Hello Blog\""
-date:       2017-01-23 22:26:00
+subtitle:   "Hello World, Hello Blog"
+date:       2017-01-23
 author:     "Tristan"
 header-img: "img/post-bg-unix-linux.jpg"
 catalog: true
