@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "我的博客搭建记(Github+Jekyll)"
+title:      "我的博客搭建记"
 subtitle:   "Hello World, Hello Blog"
 date:       2017-01-24
 author:     "Tristan"
@@ -38,8 +38,8 @@ tags:
   header-img: "img/post-bg-unix-linux.jpg"
   catalog: true
   tags:
-      - 操作流
-      - 日志
+  - 操作流
+  - 日志
   ---
   ```
 
@@ -61,3 +61,5 @@ tags:
 祝大家鸡年大吉......吧 :)
 
 
+### 后记
+我的天呐，本来以为搞定了，因为首页看起来没问题，但是当我点进我的第一篇文章，也就是本文的时候，竟然发现样！式！丢！了！，我的天，为啥啊？我以为我是误删了什么东西，把整个项目用git一步步退回去，拿头顶了三个小时愣是没发现问题在哪儿，最后拷贝别人(bebop)博客的源文件到我的\_post里发现能够正常显示，我就把文档一步步删，删到正文全没了才发现是yaml的头出了问题，`tags:`后面换下一行不要空格，这个容易出问题！！**mark**
