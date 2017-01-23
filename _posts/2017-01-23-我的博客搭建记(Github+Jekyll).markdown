@@ -5,7 +5,6 @@ subtitle:   "Hello World, Hello Blog"
 date:       2017-01-23
 author:     "Tristan"
 header-img: "img/post-bg-unix-linux.jpg"
-catalog: true
 tags:
     - 操作流
 ---
