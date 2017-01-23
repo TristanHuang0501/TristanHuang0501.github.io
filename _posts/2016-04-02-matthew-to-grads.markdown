@@ -5,6 +5,7 @@ subtitle:   "Matthew McConaughey to Grads"
 date:       2016-04-02
 author:     "Bebop.C"
 header-img: "img/post-matthew-to-grads.jpg"
+catalog:    true
 tags:
     - 人生
     - 管理
