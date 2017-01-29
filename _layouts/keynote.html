@@ -69,29 +69,28 @@ layout: default
                 <hr style="visibility: hidden;">
 
                 {% if site.duoshuo_share && site.duoshuo_username %}
-                <!-- Â§öËØ¥ Share start -->
+                <!-- ∂‡Àµ Share start -->
+                </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="{{page.id}}" data-title="{{page.title}}"
+                    data-thread-key="{{page.id}}"
+                    data-title="{{page.title}}"
+                    data-url="{{site.url}}{{site.baseurl}}{{page.url}}"
                     data-images="{{ site.url }}{{site.baseurl}}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
-                    data-content="{{ content | strip_html | truncate:80 }} | Hux BlogÔºå@HuxÈªÑÁéÑ ÁöÑ‰∏™‰∫∫ÂçöÂÆ¢"
-                    data-url="{{site.url}}{{site.baseurl}}{{page.url}}">
+                    data-content="{{ content | strip_html | truncate:80 }} | {{ site.SEOTitle }} " >
                     <div class="ds-share-inline">
-                      <style> 
-                        .ds-share-icons-16 {display:none;} 
-                      </style>
                       <ul  class="ds-share-icons-16">
-                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">ÂàÜ‰∫´Âà∞Ôºö</a></li>
-                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">ÂæÆ‰ø°</a></li>
-                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">ÂæÆÂçö</a></li>
-                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">Ë±ÜÁì£</a></li>
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">∑÷œÌµΩ£∫</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">Œ¢–≈</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">Œ¢≤©</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">∂π∞Í</a></li>
                       </ul>
                       <div class="ds-share-icons-more">
                       </div>
                     </div>
                 <hr>
                 </div>
-                <!-- Â§öÂ∞ë Share end-->
+                <!-- ∂‡Àµ Share end-->
                 {% endif %}
 
 
@@ -116,7 +115,7 @@ layout: default
 
 
                 {% if site.duoshuo_username %}
-                <!-- Â§öËØ¥ËØÑËÆ∫Ê°Ü start -->
+                <!-- ∂‡Àµ∆¿¬€øÚ start -->
                 <div class="comment">
                     <div class="ds-thread"
                         data-thread-key="{{page.id}}"
@@ -124,17 +123,17 @@ layout: default
                         data-url="{{site.url}}{{site.baseurl}}{{page.url}}" >
                     </div>
                 </div>
-                <!-- Â§öËØ¥ËØÑËÆ∫Ê°Ü end -->
+                <!-- ∂‡Àµ∆¿¬€øÚ end -->
                 {% endif %}
 
                 {% if site.disqus_username %}
-                <!-- disqus ËØÑËÆ∫Ê°Ü start -->
+                <!-- disqus ∆¿¬€øÚ start -->
                 <div class="comment">
                     <div id="disqus_thread" class="disqus-thread">
 
                     </div>
                 </div>
-                <!-- disqus ËØÑËÆ∫Ê°Ü end -->
+                <!-- disqus ∆¿¬€øÚ end -->
                 {% endif %}
 
             </div>
@@ -200,7 +199,7 @@ layout: default
 </script>
 
 {% if site.duoshuo_username %}
-<!-- Â§öËØ¥ÂÖ¨ÂÖ±JS‰ª£Á†Å start (‰∏Ä‰∏™ÁΩëÈ°µÂè™ÈúÄÊèíÂÖ•‰∏ÄÊ¨°) -->
+<!-- ∂‡Àµπ´π≤JS¥˙¬Î start (“ª∏ˆÕ¯“≥÷ª–Ë≤Â»Î“ª¥Œ) -->
 <script type="text/javascript">
     // dynamic User by Hux
     var _user = '{{site.duoshuo_username}}';
@@ -216,12 +215,12 @@ layout: default
          || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 </script>
-<!-- Â§öËØ¥ÂÖ¨ÂÖ±JS‰ª£Á†Å end -->
+<!-- ∂‡Àµπ´π≤JS¥˙¬Î end -->
 {% endif %}
 
 
 {% if site.disqus_username %}
-<!-- disqus ÂÖ¨ÂÖ±JS‰ª£Á†Å start (‰∏Ä‰∏™ÁΩëÈ°µÂè™ÈúÄÊèíÂÖ•‰∏ÄÊ¨°) -->
+<!-- disqus π´π≤JS¥˙¬Î start (“ª∏ˆÕ¯“≥÷ª–Ë≤Â»Î“ª¥Œ) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus_username}}";
@@ -234,7 +233,7 @@ layout: default
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- disqus ÂÖ¨ÂÖ±JS‰ª£Á†Å end -->
+<!-- disqus π´π≤JS¥˙¬Î end -->
 {% endif %}
 
 

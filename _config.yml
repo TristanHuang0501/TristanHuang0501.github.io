@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: TristanHuang0501@gmail.com
 description: "子路问津 | 黄美川, tirstanhuang | 这里是 @TristanHuang0501 黄美川 的个人博客，与你一起发现更大的世界。"
 keyword: "黄美川, tristanhuang, 黄美川的博客, tristan Blog, 博客, 个人网站, 互联网"
-url: "http://51tristan.top"              # your host, for absolute URL
+url: "http://TristanHuang0501.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
@@ -50,9 +50,9 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-duoshuo_username: tristan
+duoshuo_username: tristanhuang
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: false                      # set to false if you want to use Comment without Sharing
+duoshuo_share: true                      # set to false if you want to use Comment without Sharing
 
 
 
