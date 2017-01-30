@@ -17,12 +17,17 @@ tags:
 参考: [Android 中的Dalvik和ART是什么，有啥区别？](http://www.jianshu.com/p/58f817d176b7)
 
 **开发环境：**
+
 - eclipse+adt
+
 - android studio
 
 **辅助资源：**
+
 - [google开发者网站](https://developer.android.com/index.html)
+
 - [Android中文api](www.android-doc.com)
+
 - [App code](http://appxcode.com)：有很多好的轮子
 
 **项目组织文件：**
@@ -39,21 +44,28 @@ manifeast中的package是android分辨应用的唯一标识，和gen目录下的
 **ADB：**Android Debug Bridge
 直接使用需要在cmd中cd到sdk的目录下使用`adb start-server`指令，在此之前需要将该目录添加到系统环境的path下。本质是个socket。
 相关的指令：
+
 - `adb start-server`其实任何一条adb指令都可以重启adb
+
 - `adb kill-server`杀死进程
+
 - `adb install  apk的路径`安装apk
+
 - `adb uninstall com.tristan.something`这里是写的包名
+
 - `adb devices`显示所有连接的android设备
+
 - `adb shell`进入android系统的命令行（linux）
 
 **当你的手机助手占用的系统的adb的端口（5037）怎么办？**
 首先通过`adb devices`查看端口，然后在windows下cmd使用`netstat -ano`查看当前系统各个端口被什么进程所占用
 
 **一些遗漏知识点：**
+
 - 单纯线性布局永远不会发生组件的重叠
+
 - URI和URL的[区别](https://www.zhihu.com/question/21950864)
-  -
-  
+
   ```
   //举例，拨号逻辑
   public void onclick(View v){
