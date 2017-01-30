@@ -31,9 +31,11 @@ tags:
 - [App code](http://appxcode.com)：有很多好的轮子
 
 **项目组织文件：**
+
 manifeast中的package是android分辨应用的唯一标识，和gen目录下的包名相同，与src目录下的不同
 
 **真机调试时eclipse的file explorer打不开data文件夹：**
+
 当用真机开发Android时，连接了Eclipse后，默认在File Explorer下是达不开我们手机的data文件夹的，这里打不开是因为权限不足。以下有个小技巧可以解决这问题。
 
 首先，测试机先root，然后在手机上安装上Root Explorer 管理器（或类似软件），再将/data/data及其子文件夹下的访问权限都修改为可读可写可执行即可。这时候再使用eclipse的File Explorer就可以展开了，这时候就可以查看应用下的SQLite数据库了。
@@ -41,7 +43,9 @@ manifeast中的package是android分辨应用的唯一标识，和gen目录下的
 实验室手机[Nexus5快速root工具](http://www.shuame.com/faq/root-tutorial/2613-google-nexus5.html)
 
 **DDMS：**Dalvik Debug monitor service
+
 **ADB：**Android Debug Bridge
+
 直接使用需要在cmd中cd到sdk的目录下使用`adb start-server`指令，在此之前需要将该目录添加到系统环境的path下。本质是个socket。
 相关的指令：
 
@@ -58,6 +62,7 @@ manifeast中的package是android分辨应用的唯一标识，和gen目录下的
 - `adb shell`进入android系统的命令行（linux）
 
 **当你的手机助手占用的系统的adb的端口（5037）怎么办？**
+
 首先通过`adb devices`查看端口，然后在windows下cmd使用`netstat -ano`查看当前系统各个端口被什么进程所占用
 
 **一些遗漏知识点：**
