@@ -71,7 +71,7 @@ manifeast中的package是android分辨应用的唯一标识，和gen目录下的
 
 - URI和URL的[区别](https://www.zhihu.com/question/21950864)
 
-  ```
+  ```java
   //举例，拨号逻辑
   public void onclick(View v){
       EditText et = (EditText) findViewById(R.id.et);
