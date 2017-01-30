@@ -49,7 +49,7 @@ manifeast中的package是android分辨应用的唯一标识，和gen目录下的
 
 **一些遗漏知识点：**<br>
 - 单纯线性布局永远不会发生组件的重叠<br>
-- URI和URL的[区别](https://www.zhihu.com/question/21950864)
+- URI和URL的[区别](https://www.zhihu.com/question/21950864)<br>
 
   ```java
   //举例，拨号逻辑
