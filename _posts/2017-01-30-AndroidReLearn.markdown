@@ -36,7 +36,8 @@ manifeast中的package是android分辨应用的唯一标识，和gen目录下的
 **ADB：**Android Debug Bridge
 
 直接使用需要在cmd中cd到sdk的目录下使用`adb start-server`指令，在此之前需要将该目录添加到系统环境的path下。本质是个socket。<br>
-相关的指令：<br>
+相关的指令：
+
 - `adb start-server`其实任何一条adb指令都可以重启adb<br>
 - `adb kill-server`杀死进程<br>
 - `adb install  apk的路径`安装apk<br>
