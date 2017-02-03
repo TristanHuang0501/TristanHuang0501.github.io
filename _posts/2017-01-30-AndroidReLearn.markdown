@@ -10,7 +10,8 @@ tags:
 - Android 
 ---
 
- **虚拟机：**ART是趋势，DalVik已经慢慢在被淘汰<br>
+ **虚拟机：**ART是趋势，DalVik已经慢慢在被淘汰
+ 
  > ART，即Android Runtime。ART 的机制与 Dalvik 不同。在Dalvik下，应用每次运行的时候，字节码都需要通过即时编译器（just in time ，JIT）转换为机器码，这会拖慢应用的运行效率，而在ART 环境中，应用在第一次安装的时候，字节码就会预先编译成机器码，使其成为真正的本地应用。这个过程叫做预编译（AOT,Ahead-Of-Time）。这样的话，应用的启动(首次)和执行都会变得更加快速。<br>
 
 参考: [Android 中的Dalvik和ART是什么，有啥区别？](http://www.jianshu.com/p/58f817d176b7)
