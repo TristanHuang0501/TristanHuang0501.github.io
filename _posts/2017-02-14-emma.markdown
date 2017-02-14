@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "《Emma》读书笔记"
-subtitle:   
+subtitle:   发生在Highbury的故事
 date:       2017-02-14
 author:     "Tristan"
 header-img: "img/post-bg-emma.jpg"
@@ -32,7 +32,7 @@ Emma无疑是书中角色形象最为丰满的，Wiki对她的介绍就很完整
 
 起初的Emma倒是和[《Gone with the wind》](https://en.wikipedia.org/wiki/Gone_with_the_Wind_(novel))中的Scarlett挺像的，都是大家小姐，都有一个宠爱的父亲，都有些小任性。但是Scarlett无疑性格上要强多了，而Emma倒是更善解人意，性格更温柔些，虽然有些自视过高，以为自己在人性的洞察方面有着旁人所不能及的洞察力，有时候会试图把自己的想法强加到别人身上。
 
-> 她爱玛可不能看着她（Harriet）管，她要改善她的状况，帮她拜托那些不体面的人，把她引进到上流社会，还要培养她的思想和举止。这是一件有趣的，当然也是十分仁慈的举动。
+> 她爱玛可不能看着她（Harriet）不管，她要改善她的状况，帮她拜托那些不体面的人，把她引进到上流社会，还要培养她的思想和举止。这是一件有趣的，当然也是十分仁慈的举动。
 
 因为这点自视甚高，Emma犯了不少的错误（书中Austen也在前半部分对这一点加了不少小讽刺），但是在一次次的错误之后，Emma慢慢地反省和领悟到自己的自大，在最后的误会中（以为Harriet对Churchill倾心，而实则是对Knightley）触及到了自己真心，明白自己真正爱的是一直陪伴在她和Highbury身边的Knightley。
 
