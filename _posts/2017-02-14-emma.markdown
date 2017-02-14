@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "爱么？爱玛！"
-subtitle:   Emma & Knightley
+title:      "《Emma》读书笔记"
+subtitle:   
 date:       2017-02-14
 author:     "Tristan"
 header-img: "img/post-bg-emma.jpg"
@@ -10,4 +10,83 @@ tags:
 - 书摘
 ---
 
-### There is nothing,just for test.
+
+> **简介：**[Emma](https://en.wikipedia.org/wiki/Emma_(novel)), by [Jane Austen](https://en.wikipedia.org/wiki/Jane_Austen), is a novel about youthful hubris and the perils of misconstrued romance. The novel was first published in December 1815. As in her other novels, Austen explores the concerns and difficulties of genteel women living in Georgian–Regency England; she also creates a lively comedy of manners among her characters.
+
+![Emma](https://github.com/TristanHuang0501/TristanHuang0501.github.io/raw/master/img/in-post/post-emma-bookcover.jpg)
+
+### 总的印象
+在初读本书的时候就看到封面上的书评称赞Emma为Austen最成熟的作品， 带着期待之情就开始了阅读，可以说书的前面并不是特别吸引我，每次读个二三十页便有些乏味，也不免有些失望，但是这一情形在书读到最后的1/6的时候开始改变了（对应于Boxhill之行那一段情节，这篇blog题目的背景图就是Boxhill），随着包袱的展开，之前隐藏的很多小细节渐渐地被放大，从而引得人赞叹情节安排的巧妙，人物刻画的精彩。在读完了之后觉得还有必要再过一遍才能抓住很多细节，所以就找了BBC在09年出的[Emma微型剧（4集）](http://www.acfun.cn/v/ac763520)看了一遍，既能回顾很多细节，也可以形象地感受一下书中的环境和文化，毕竟我对19世纪初的英国的文化仅限于看过的Austen的《傲慢与偏见》还有电视剧《唐顿庄园》。下面就来具体地谈一谈：
+
+### 谈角色塑造
+
+#### Emma
+
+Emma无疑是书中角色形象最为丰满的，Wiki对她的介绍就很完整：
+
+> Emma Woodhouse, the protagonist of the story, is a **beautiful, high-spirited, intelligent, and 'slightly' spoiled young woman of twenty** when the story opens. Her mother died when she was young. She has been mistress of the house since her older sister got married. **Although intelligent, she lacks the discipline to practise or study anything in depth**. She is portrayed as very compassionate to the poor, but at the same time has a strong sense of class status. Her affection for and patience towards her valetudinarian father are also noteworthy. While she is in many ways mature, Emma makes some serious mistakes, mainly due to her conviction that she is always right and her lack of experience. Although she has vowed she will never marry, she delights in making matches for others. She has a brief flirtation with Frank Churchill, however, **she realises at the end of the novel that she loves Mr Knightley.**
+
+用书中的第一段话来说：**"Emma Woodhouse, handsome, clever, and rich."**，这不同于《Pride and Prejudice》中的Elizabeth和《苔丝》中的Tess，她们的家境和地位都处在较低的位置，而Emma则从一开始就是个富家女，有着很好的教养，但同时等级和地位观念也比较强烈，带点小调皮，在感情上有时候会把自己的意愿加到别人身上，觉得老江有一句挺合适用在她身上的：**"too young, too simple, and sometimes naive"**，但是呢这却让人感觉到真实，毕竟作为一个二十多岁从没离开过Highbury，读书也不求甚解的典型的大家小姐来说，让她跳开文化和历史的大背景做一个符合新世纪价值观的完美女性也是不现实的，有缺点才显得真实和平易近人。
+
+![老江](https://github.com/TristanHuang0501/TristanHuang0501.github.io/raw/master/img/in-post/post-emma-naive.jpg)
+
+起初的Emma倒是和[《Gone with the wind》](https://en.wikipedia.org/wiki/Gone_with_the_Wind_(novel))中的Scarlett挺像的，都是大家小姐，都有一个宠爱的父亲，都有些小任性。但是Scarlett无疑性格上要强多了，而Emma倒是更善解人意，性格更温柔些，虽然有些自视过高，以为自己在人性的洞察方面有着旁人所不能及的洞察力，有时候会试图把自己的想法强加到别人身上。
+
+> 她爱玛可不能看着她（Harriet）管，她要改善她的状况，帮她拜托那些不体面的人，把她引进到上流社会，还要培养她的思想和举止。这是一件有趣的，当然也是十分仁慈的举动。
+
+因为这点自视甚高，Emma犯了不少的错误（书中Austen也在前半部分对这一点加了不少小讽刺），但是在一次次的错误之后，Emma慢慢地反省和领悟到自己的自大，在最后的误会中（以为Harriet对Churchill倾心，而实则是对Knightley）触及到了自己真心，明白自己真正爱的是一直陪伴在她和Highbury身边的Knightley。
+
+#### Knightley
+
+作为Donwell的主人，Knightley无疑是个有身份有地位的绅士，而且是个真正的绅士，英国人的绅士文化从他身上可见一斑：睿智、冷静、善解人意且乐于救难，比Emma大十七岁，可以说是看着Emma长大的。自然，他也不是完美的，不风趣，过分严肃，爱批评，但这更显得严谨与深沉。
+
+> 其实，能发现爱玛缺点的人本来就寥寥无几，而发现缺点又肯向她指出的却只有奈特利先生一人。
+
+Knightley对Emma熟悉之极，故而作为旁观者的话时常能发现Emma的问题，并且常常当面指出Emma的问题所在。也正是这种熟悉和陪伴感，才让最后的爱情醒悟来的尤其强烈。
+
+在书中讲到邀众人到Donwell去采摘草莓的时候，令人讨厌的Elton夫人想要操办这事儿，但是Knightley却很果决地拒绝了，我觉得这一刻他好Man啊：
+
+> ”不，“奈特利先生平静地答道，“世界上只有一个结了婚的女人，我可以让她随意邀请客人来Donwell，那就是------”
+> “我想是Weston太太吧。”Elton太太觉得很委屈，打断了他的画。
+> “不，是奈特利太太------在她还没有出现之前，我要自己来安排这类事情。”
+
+
+
+### 谈爱情
+
+> For aught that I could ever read, could ever hear by tale or history, the course of true love never did run smooth.”（“在我所读过，所听过的任何故事或史实里头，真诚的爱情之路永不会是平坦的”。）------莎士比亚，《仲夏夜之梦》
+
+真正的爱情从来不会是一帆风顺的，我们每个人都在爱与被爱的路上体会着人生的这一幸福的“折磨”，从最初的懵懂、自信或自卑、任性冲动到正视自己的内心，用爱充盈生活的同时也能用生活去升华爱，我们都在不断的成长。
+
+《Emma》一书从一段婚姻开始（Taylor）到三段婚姻结束，通篇都是讲爱情的。在这个过程中Emma在一次次由于自己的“敏锐的洞察力”闹出的姻缘误会中逐渐成长，最后迎来了自己的爱情，喜剧式的结局同《Pride and Prejudice》一样，Auston用她的笔触写出了她的爱情观。
+
+这种爱情是自私的，当Emma发现Harriet喜欢上Knightley上之后她的触动是巨大的，一种难以言喻的失去感充满了她的身心，她彻底地慌乱了：
+
+> 她脑子里像箭似的闪过一个念头：奈特利先生不能跟被人结婚，只能跟她爱玛！
+
+而当Knightley先生向Emma表露了心迹之后，幸福到来的同时她也意识到：
+
+> 她不仅来得及认识到这一切 ，心里伴随着一股暖融融的甜蜜感，而且还能庆幸自己没把哈里特的秘密泄露出去，她断定这秘密不必泄露，也不该泄露。现在，她对她那可怜的朋友，只能做到这个份上了，因为她没有那种侠义心肠，可以激励她央求奈特利先生不要爱她，而去爱哈特利。
+> 她同情哈特利，感到又痛心又懊悔。但是，她没有慷慨到头脑发热的地步，完全置可能性和合理性于不顾。她把她的朋友引入了歧途，她将永远为此责备自己。
+
+爱情生来就是自私的，只能由爱情联系的双方所共有，这是它的与生俱来的属性，也是真正的对爱情的忠贞。
+
+爱情还意味着奉献，这是自私的反面，两者却并不抵触，是一种必然引致另一种必然，舍弃了爱情在两者之外的联系必然会要求两者中的任何一个人都对对方全身心地奉献，这样才能在感情的世界里融为一体，这种融合就像橡树与木棉：
+
+> “根紧握在地下,叶相触在云里”  ------舒婷，《致橡树》
+
+如果不能倾情地奉献，那在这段关系中必然会有所保留，有所保留就会有所抵触，因为爱情总是蔓延在两个人生活的各个方面，一旦有了它无法触及的地方并且遭到了拒绝，那么就会使得感情出现间隙，即使是双方都不会察觉到，但等这种间隙积累到一定时候就会爆发处惊人的破坏力，这种破坏力不仅破化了本来看似完美的爱情，也会伤到爱情的双方。
+
+真渴望人生能遇到能让自己无所保留的爱情。
+
+### 后话
+
+今天是情人节呢，在看完了BBC微型剧的最后一集才开始着手写这次的读书笔记，由于这次不是在Kindle上看的，无法直接导出批注，所以都是手打的原文。
+
+书还是很值的一看的，电视剧也不错，忠于原著，同时也少少地增强了一些父爱的元素，个人感觉拍的很好，特别是演员的眼神很到位。
+
+希望2017自己的爱情也能有个幸福的转折。
+
+
+
+ 
