@@ -23,6 +23,13 @@ tags:
 - [使用java来自动初始化Jekyll的md文件](http://www.tuicool.com/articles/yu6vIfe)
 - [jekyll+markdown+git+github](https://droidcat.bitbucket.io/2015/05/26/blog-or-wiki.html)
 
+### 本地搭建的最简单步骤
+- 安装Ruby Installer
+- 在cmd中输入`gem install jekyll`
+- 在cmd中输入`gem install jekyll-paginate`
+- cd到仓库中输入`jekyll server`
+- 浏览器中输入`localhost:4000`即可本地调试
+
 ### 记录值得注意的地方
 - _post 文件夹中放用来发表的文章：
   - 文件名格式：`yyyy-mm-dd-post-name.md`或者`yyyy-mm-dd-post-name.markdown`
