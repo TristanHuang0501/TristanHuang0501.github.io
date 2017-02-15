@@ -18,6 +18,8 @@ tags:
 
 参考: [Android 中的Dalvik和ART是什么，有啥区别？](http://www.jianshu.com/p/58f817d176b7)
 
+------------
+
 ### 相关资源
 - [google开发者网站](https://developer.android.com/index.html)
 - [Android中文api](www.android-doc.com)
@@ -28,6 +30,7 @@ tags:
 ### 组件
 
 #### Button
+
 ##### Button点击事件触发的两种方法：
 1. 在activity中`bt.setOnClickListener(new onClickListener())`
 2. 在layout中，bt设置一个属性`android:onClick = "something"`，然后在activity中定义一个同名的方法`public void something(View v){}`这个方法所接收的参数为一个View对象，当按钮被按下时，系统会调用这个`something()`方法
@@ -43,11 +46,11 @@ tags:
 
 - 在java代码中：
     - `btn.getBackground().setAlpha(100)` //0~255透明度
-
-> - 颜色和不透明度 (alpha) 值以十六进制表示法表示。任何一种颜色的值范围都是 0 到 255（00 到 ff）。
-> - 对于 alpha，00 表示完全透明，ff 表示完全不透明。
-> - 表达式顺序是`“aabbggrr”`，其中“aa=alpha”（00 到 ff）；“bb=blue”（00 到 ff）；“gg=green”（00 到 ff)；“rr=red”（00 到 ff）。
-> - 例如，如果您希望对某叠加层应用不透明度为 50% 的蓝色，则应指定以下值：7fff0000
+- 数值量：
+ - 颜色和不透明度 (alpha) 值以十六进制表示法表示。任何一种颜色的值范围都是 0 到 255（00 到 ff）。
+ - 对于 alpha，00 表示完全透明，ff 表示完全不透明。
+ - 表达式顺序是`“aabbggrr”`，其中“aa=alpha”（00 到 ff）；“bb=blue”（00 到 ff）；“gg=green”（00 到 ff)；“rr=red”（00 到 ff）。
+ - 例如，如果您希望对某叠加层应用不透明度为 50% 的蓝色，则应指定以下值：7fff0000
 
 
 -------------
