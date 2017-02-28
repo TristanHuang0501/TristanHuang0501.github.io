@@ -1,0 +1,183 @@
+---
+layout:     post
+title:      "SQLite知识整理"
+subtitle:   Android中的SQLite
+date:       2017-02-28
+author:     "Tristan"
+header-img: "img/post-bg-sqlite.jpg"
+catalog:    true
+tags:
+- Android
+- 数据库
+---
+
+
+> SQLite 是一个软件库，实现了自给自足的、无服务器的、零配置的、事务性的 SQL 数据库引擎。SQLite 是在世界上最广泛部署的 SQL 数据库引擎。SQLite 源代码不受版权限制。
+
+[SQLite教程，菜鸟教程](http://www.runoob.com/sqlite/sqlite-tutorial.html)
+
+### SQLite认知
+
+> SQLite是一款轻型的数据库，是遵守ACID的关联式数据库管理系统，**它的设计目标是嵌入式的**，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持 Windows/Linux/Unix等等主流的操作系统，同时能够跟很多程序语言相结合，比如Tcl、PHP、Java、C++、.Net等，还有ODBC接口，同样比起 Mysql、PostgreSQL这两款开源世界著名的数据库管理系统来讲，它的处理速度比他们都快。
+
+Android和IOS都是以SQLite作为数据库引擎的。
+
+####  SQLite数据库的特点
+1. **轻量级：**SQLite和C/S模式的数据库软件不同，它是进程内的数据库引擎，因此不存在数据库的客户端和服务器。使用SQLite一般只需要带上它的一个动态  库，就可以享受它的全部功能。而且那个动态库的尺寸也挺小，以版本3.6.11为例，Windows下487KB、Linux下347KB。
+2. **不需要“安装”：**SQLite的核心引擎本身不依赖第三方的软件，使用它也不需要"安装"。有点类似那种绿色软件。
+3. **单一文件：**数据库中所有的信息（比如表、视图等）都包含在一个文件内。这个文件可以自由复制到其它目录或其它机器上。
+4. **弱类型的字段：**同一列中的数据可以是不同类型
+
+####  数据类型
+SQLite采用的是动态数据类型，会根据存入值自动判断。
+SQLite具有以下几种常用的数据类型：
+
+|类型|说明
+|:--|
+|NULL|空值
+|VARCHAR(n)|长度不固定且其最大长度为 n 的字串，n不能超过 4000
+|CHAR(n)|长度固定为n的字串，n不能超过 254
+|INTEGER|值被标识为整数,依据值的大小可以依次被存储为1,2,3,4,5,6,7,8
+|REAL|所有值都是浮动的数值,被存储为8字节的IEEE浮动标记序号
+|TEXT|值为文本字符串,使用数据库编码存储(TUTF-8, UTF-16BE or UTF-16-LE)
+|BLOB|值是BLOB数据块，以输入的数据格式存储。如何输入就如何存储,不改变格式
+|DATA|包含了 年份、月份、日期
+|TIME|包含了 小时、分钟、秒
+
+
+
+
+###  Android操作SQLite用法
+
+更具体的增删改查的实例看这篇博客： [Android 操作SQLite基本用法](http://blog.csdn.net/codeeer/article/details/30237597/)，写的很详细。
+
+#### 常用的api
+
+|方法名称|方法表示含义|
+|: -- |:--|
+|openOrCreateDatabase()|打开或创建数据库|
+|insert()|插入一条记录|
+|delete()|删除一条记录|
+|query()|查询一条记录|
+|update()|修改记录|
+|execSQL()|执行一条SQL语句|
+|close()|关闭数据库|
+
+**备注：**方法中的参数都省略不写了，具体的可以参看api文档
+
+#### 查询数据
+一般通过cursor来得到查询数据，而且调用rawQuery来查询
+需要特别注意的是在Android中查询数据是通过Cursor类来实现的，当我们使用SQLiteDatabase.query()方法时，会得到一个Cursor对象，Cursor指向的就是每一条数据。它提供了很多有关查询的方法。具体的方法如下：
+	
+	public  Cursor query(String table,String[] columns,String selection,String[]  selectionArgs,String groupBy,String having,String orderBy,String limit);
+
+Cursor是一个游标接口，提供了遍历查询结果的方法，如移动指针方法move()，获得列值方法getString()等
+
+```java
+Cursor cursor = database.rawQuery("select * from person where name like ?",new String[]{"小明"});                
+//实例化一个对象                
+ArrayList<Map<String,Object>> list = new ArrayList<>();                
+//循环取值                
+while (cursor.moveToNext()){                    
+	//获取数据                   
+	String name = cursor.getString(1); //列按照从0开始算，1指的是name列
+	String name = cursor.getString(cursor.getColumnIndex("name"));//或者可以这样写
+	//实例化map对象                    
+	Map<String,Object> map = new HashMap<>();                    
+	//添加值                    
+	map.put("name",name);                    
+	//将map对象添加list中                    
+	list.add(map);  
+}
+```
+
+#### 辅助类：SQLiteOpenHelper
+该类是SQLiteDatabase一个辅助类。这个类主要生成一 个数据库，并对数据库的版本进行管理。当在程序当中调用这个类的方法getWritableDatabase()或者 getReadableDatabase()方法的时候，如果当时没有数据，那么Android系统就会自动生成一个数据库。 
+
+**SQLiteOpenHelper 是一个抽象类，我们通常需要继承它**，并且实现里面的3个函数：
+1. `onCreate（SQLiteDatabase）`在数据库第一次生成的时候会调用这个方法，也就是说，只有在创建数据库的时候才会调用，当然也有一些其它的情况，一般我们在这个方法里边生成数据库表。
+2. ` onUpgrade（SQLiteDatabase，int，int）`当数据库需要升级的时候，Android系统会主动的调用这个方法。一般我们在这个方法里边删除数据表，并建立新的数据表，当然是否还需要做其他的操作，完全取决于应用的需求。
+3. `onOpen（SQLiteDatabase）`这是当打开数据库时的回调函数，一般在程序中不是很常使用。
+
+
+#### SQLite的事务
+
+> 摘自博客：[ Android在SQLite中使用事务](http://blog.csdn.net/howlaa/article/details/17348817#)
+
+SQLite不仅支持标准的SQL语法，还遵循了数据库的ACID事务
+
+使用SQLiteDatabase的beginTransaction()方法可以开启一个事务，程序执行到endTransaction() 方法时会检查事务的标志是否为成功，如果为成功则提交事务，否则回滚事务。当应用需要提交事务，必须在程序执行到endTransaction()方法之前使用setTransactionSuccessful() 方法设置事务的标志为成功，如果不调用setTransactionSuccessful() 方法，默认会回滚事务。
+
+```java
+SQLiteDatabase db = dbOpenHelper.getWritableDatabase();  
+    db.beginTransaction();//开启事务  
+    try{  
+        db.execSQL("update person set amount=amount-10 where personid=1");  
+        db.execSQL("update person set amount=amount+10 where personid=2");  
+        db.setTransactionSuccessful();//设置事务的标志为True  
+    }finally{  
+        db.endTransaction();//结束事务,有两种情况：commit,rollback,  
+    //事务的提交或回滚是由事务的标志决定的,如果事务的标志为True，事务就会提交，否侧回滚,默认情况下事务的标志为False  
+    } 
+```
+
+注意，一定要调用db.setTransactionSuccessful().还一定不要忘记在finally{}语句块里结束事务。
+
+当大规模地插入或更新数据的时候，由于SQLite默认一条语句就是一个事务，所以会导致效率低，这个时候可以把批处理SQL语句写成一个事务,参看事例:
+- [Android SQLite 事务处理](http://blog.csdn.net/a443453087/article/details/7222247)
+- [Android SQLite 事务处理Operation SQLite](http://www.2cto.com/kf/201501/371513.html)
+
+### SQL语句
+
+> 可参考博客：[SQL常用增删改查语句](http://blog.knowsky.com/208115.htm)
+> 在android中的写法可以参看：[Android SQLite应用详解](http://www.jianshu.com/p/4ad85d260a0d)
+
+1. 创建表
+```sql
+create table 表名 if not exists (id integer primary key autoincrement, 列名1,列名2, 列名3)	
+```
+	2. `primary key` :主键
+	3. `autoincrement`：自增型变量
+	4. `if not exists`：如果创建的表存在就不创建
+
+2. 增
+```sql
+insert [into] <表名> (列名) values (列值)
+```
+
+3. 删
+```sql
+delete from <表名> [where <删除条件>]
+```
+
+4. 改
+```sql
+update <表名> set <列名=更新值> [where <更新条件>]
+```
+
+5. 查
+```sql
+select <列名> from <表名> [where <查询条件表达试>] [order by <排序的列名>[asc或desc]]
+```
+
+6. 删表
+```sql
+drop table if exists 表名
+```
+
+
+
+### 访问SQLite数据库
+- adb访问：
+	- [Android中使用adb访问SQLite的方法 ](http://blog.sina.com.cn/s/blog_3fe961ae0100qrxn.html)
+	- [adb、sqlite3操作android数据库](http://blog.csdn.net/harvic880925/article/details/40477349)
+
+
+- 通过可视化软件SQLite Expert Personal查看
+
+
+### 参考博文
+- [Android 操作SQLite基本用法](http://blog.csdn.net/codeeer/article/details/30237597/)：这篇比较全面，是参考较多的
+- [Android SQLite应用详解](http://www.jianshu.com/p/4ad85d260a0d)：这篇主要讲java中的sql写法
+- [SQL常用增删改查语句](http://blog.knowsky.com/208115.htm)：SQL语法
+- [ Android在SQLite中使用事务](http://blog.csdn.net/howlaa/article/details/17348817#)
