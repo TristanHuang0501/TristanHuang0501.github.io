@@ -140,6 +140,26 @@ layout: default
                                 </a>
                             </li>
                             {% endif %}
+                             {% if site.zhihu_username %}
+                            <li>
+                                <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-stack-1x fa-inverse">知</i>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if site.csdn_username %}
+                            <li>
+                                <a target="_blank" href="blog.csdn.net/{{ site.csdn_username }}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-stack-1x fa-inverse">CS</i>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
                             {% if site.github_username %}
                             <li>
                                 <a target="_blank" href="https://github.com/{{ site.github_username }}">
@@ -150,16 +170,7 @@ layout: default
                                 </a>
                             </li>
                             {% endif %}
-                            {% if site.zhihu_username %}
-                            <li>
-                                <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-stack-1x fa-inverse">知</i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
+                           
                             {% if site.linkedin_username %}
                             <li>
                                 <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
