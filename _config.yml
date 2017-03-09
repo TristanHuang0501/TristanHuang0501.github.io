@@ -7,7 +7,7 @@ description: "子路问津 | 黄美川, tirstanhuang | 这里是 @TristanHuang05
 keyword: "黄美川, tristanhuang, 黄美川的博客, tristan Blog, 博客, 个人网站, 互联网"
 url: "http://TristanHuang0501.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
-baidu-site-verification: "d6e8bxSi8D"
+
 
 # SNS settings
 RSS: false
@@ -62,8 +62,8 @@ duoshuo_share: true                      # set to false if you want to use Comme
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: 51tristan.top
+ga_track_id: 'UA-93366010-1'            # Format: UA-xxxxxx-xx
+ga_domain: tristanhuang0501.github.com
 
 
 
