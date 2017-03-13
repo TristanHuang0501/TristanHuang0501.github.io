@@ -68,9 +68,9 @@ tags:
 
 上面的方法已经失效，腾讯会改变链接地址，只能通过[好多歌](www.haoduoge.com)了：
 
-测试一下，这里我放了一首羽泉的彩虹，会预先加载，循环播放：
+测试一下，这里我放了一首羽泉的彩虹，会预先加载，循环播放，考虑到移动端的屏幕适配问题，宽度最好设置为300px：
 <div>
-  <audio controls loop preload style="width: 450px" src="http://mp3.haoduoge.com/s/2017-03-13/1489401430.mp3"></audio>
+  <audio controls loop preload style="width: 300px" src="http://mp3.haoduoge.com/s/2017-03-13/1489401430.mp3"></audio>
 </div>
 
 ### 遗留和待改进
