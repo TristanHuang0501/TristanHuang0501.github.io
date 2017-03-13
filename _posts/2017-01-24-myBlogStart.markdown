@@ -63,13 +63,16 @@ tags:
 
 最新的规定在这里：[GitHub Page的规定](https://help.github.com/articles/what-is-github-pages/#recommended-limits)
 
+### 关于添加歌曲外链
+找到了一个关于添加歌曲外链的好方法，而且应该很难会失效，是利用的QQ邮箱的附件收藏功能，具体的方法看[这里](https://zhidao.baidu.com/question/583100560403319365.html)
+
+测试一下，这里我放了一首羽泉的彩虹，会预先加载，循环播放：
+<div>
+  <audio controls loop preload style="width: 450px" src="https://tj.mail.ftn.qq.com/ftn_handler/eb6af35a5456d311ad6db0134e1653d230b47c399376bfc7080cae2777e46323d75f5aa18d66fdac0e2d4ecd623a1fce0874b34e00e0339499127da4175a4fa3?compressed=0&dtype=1&fname=%E7%BE%BD%E6%B3%89%20-%20%E5%BD%A9%E8%99%B9.mp3"></audio>
+</div>
 
 ### 遗留和待改进
-- ~~评论区的添加问题~~
-- ~~网页的icon更换~~
-- ~~设计合理的标签~~
-- footer和侧边的facebook和豆瓣等标签的添加
-- ~~域名绑定有问题，51tristan.top还是会跳到以前的主页上~~
+- 引入google统计或者百度统计
 
 
 ### 感言
