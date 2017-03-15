@@ -4,7 +4,7 @@ title:      "《龙与地下铁》"
 subtitle:   马伯庸的天马行空
 date:       2017-03-15
 author:     "Tristan"
-header-img: "img/post-bg-sqlite.jpg"
+header-img: "img/post-bg-novel-dragon.jpg"
 catalog:    true
 tags:
 - 书摘
