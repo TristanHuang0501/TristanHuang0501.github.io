@@ -34,7 +34,7 @@ tags:
 - _post 文件夹中放用来发表的文章：
   - 文件名格式：`yyyy-mm-dd-post-name.md`或者`yyyy-mm-dd-post-name.markdown`
   - 在开始写具体内容前，必须填写yaml头信息，这样该文件才能被Jekyll进行处理。头信息必须在文件的开始部分，并且按照yaml的格式，如本篇文章：
-  
+
   ```
   ---
   layout:     post
@@ -72,6 +72,21 @@ tags:
 <div>
   <audio controls loop preload style="width: 300px" src="http://mp3.haoduoge.com/s/2017-03-13/1489401430.mp3"></audio>
 </div>
+
+### emoji支持
+Jekyll 本身不支持 emoji，不过有个插件可以使它支持 emoji 表情，那就是 jemoji(jekyll/jemoji)，显然这是官方提供的插件。
+步骤：
+- cmd安装gem包`gem install jemoji`
+- '_config.yml'文件中添加
+  ```
+  gems:
+      -jemoji
+  ```
+- 然后就可以使用`:smile:`来显示😄啦
+
+参考博客:[Jekyll 的 emoji 插件](http://blog.fooleap.org/jemoji.html)
+
+所有支持的表情：[EMOJI CHEAT SHEET](https://www.webpagefx.com/tools/emoji-cheat-sheet/)
 
 ### 遗留和待改进
 - 引入google统计或者百度统计

@@ -33,7 +33,9 @@ anchorjs: true                          # if you want to customize anchor. check
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+gems:
+  - jekyll-paginate
+  - jemoji
 
 
 
@@ -59,7 +61,7 @@ duoshuo_share: true                      # set to false if you want to use Comme
 
 
 # Analytics settings
-# Baidu Analytics 
+# Baidu Analytics
 # ba_track_id: [your track id]
 
 # Google Analytics
