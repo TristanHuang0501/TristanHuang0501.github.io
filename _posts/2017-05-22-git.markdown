@@ -1,0 +1,133 @@
+---
+layout:     post
+title:      "git - 理解Ta，爱Ta"
+subtitle:   知识回顾和资源整理
+date:       2017-05-22
+author:     "Tristan"
+header-img: "img/post-bg-git.png"
+catalog:    true
+tags:
+- git
+---
+
+
+&#160; &#160; &#160; &#160; 接触Git也有几个月了，刚开始只是简单地把它当做代码云存储和备份的好方法，后面深入学习了一下，感觉有必要做一个阶段性的总结。
+
+> [Git](git-scm.com) 是由Linus Torvalds开发的，最初是为了解决Linux的代码托管问题，而Linus正是Linux的开发者。
+
+### 1. 版本控制系统：
+
+1. 集中式版本控制：SVN，CVS
+2. 分布式版本控制：Git，BitKeeper，Mercurial
+
+-----
+
+### 2. Git配置
+
+#### 1. 设置Git的user name和email
+```
+$ git config --global user.name "TristanHuang0501"
+$ git config --global user.email "TristanHuang0501@gmail.com"
+```
+
+#### 2. 生成秘钥
+```
+$ ssh-keygen -t rsa -C "TristanHuang0501@gmail.com"
+```
+连续3个回车。如果不需要密码的话。
+最后得到了两个文件：id_rsa和id_rsa.pub
+
+#### 3. 登录github,添加ssh keys
+复制id_rsa.pub中的内容到github的设置中添加公钥
+
+#### 4. 更多设置
+这时候就差不多可以用了，需要其他设置的可以参考：[git-ssh 配置和使用](https://segmentfault.com/a/1190000002645623)
+
+---
+
+### 3. git远程仓库
+&#160; &#160; &#160; &#160; 除了在本地使用外，更为重要的就是远程仓库的使用了，我们一般就是使用github，而大部分的互联网公司都会使用gitlab搭建自己的代码库和代码管理平台，因为这是很大的一笔资源和财富。
+
+**一些常用的命令：**
+1. 本地项目添加远程仓库(以该博客项目为例)：
+```
+$ git remote add origin git@github.com:TristanHuang0501/TristanHuang0501.github.io.git
+```
+2. 本地推送至远程仓库：
+```
+$ git push -u origin master
+```
+ 第一次要使用`-u`参数，可以将本地的master分支与远程的master分支关联，后面再推送就可以直接`git push`或者`git push origin master`了
+
+------
+
+### 4. 版本管理
+&#160; &#160; &#160; &#160; 这里其实内容非常多，也是最需要理解的地方，但是国内外都已经有了很多总结的非常好的文章了，所以我直接就贴出来，需要细看的直接参考就好了
+- [Git教程 - 廖雪峰的官方网站](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+- [图解Git](http://marklodato.github.io/visual-git-guide/index-zh-cn.html)：这个得强烈推荐，我看了一遍，觉得用图像把git的流程表达地非常之清楚，特别是Merge和Checkout部分
+
+
+这里还得强调几个注意点：
+#### 1.创建切换分支
+```
+$ git checkout -b dev
+```
+上面的这一句相当于两句：
+```
+$ git branch dev
+$ git checkout dev
+```
+- 如果当前分支有还未提交的代码，则无法切换成功
+- 开发过程中master主要用来打tag和放release版本，而另有一个dev线用来开发
+- `$ git branch`可以查看本地的所有分支：
+	- `-r`参数列出所有的远程分支
+	- `-a`参数列出所有本地和远程分支
+	- `-d`参数删除分支
+
+#### 2.  合并与衍合
+有两种途径，特别注意这两者的区别，现实中常会发生第二种需要衍合的场景：
+1. `merge` 命令把不同分支合并起来，如图把当前提交(ed489 )和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交，**所有会有一个merge点作一次新的commit**
+![Alt text](http://oqcr9s3uf.bkt.clouddn.com/post-mt-merge.png)
+
+2. `rebase`衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 
+![Alt text](http://oqcr9s3uf.bkt.clouddn.com/post-mt-rebase.png)
+
+#### 3. 标签
+- 推送tag到remote：`$ git push origin <tag-name>`
+- 推送本地所有tag到remote：`$ git push origin tags`
+- 删除远程tag：
+	- 必须先删除本地tag
+	- `$ git push origin :refs/tags/<tag-name>`
+
+
+#### 4. 版本回滚
+reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和索引。简单地说就是改变了history区，index和working dir要看选用的参数
+![Alt text](http://oqcr9s3uf.bkt.clouddn.com/post-mt-reset.png)
+- `--mixed`：默认方式，只保留源码，回退commit和index信息
+- `--soft`：回退到某个版本，只回退了commit信息，不改变index和工作区
+- `--hard`（慎用）：彻底回退到某个版本，工作区也改变了
+- 如果没有加版本号，如`$ git reset`，则默认版本号为HEAD，方式为`--mixed`
+
+#### 5. history区查看
+`$ git log`可以查看目前的历史区，找到对应的RSA，就可以checkout，但是往前回退会导致最新的一些commit信息没有了，这时候可以用`$ git  reflog`，可以看到所有操作对应的RSA，使用`$ gitk`可以看到时间表
+
+网上看到有些人对log做了个个性化的配置，觉得挺好看的，推荐一下
+```
+$ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+```
+效果是这样的：
+![Alt text](http://oqcr9s3uf.bkt.clouddn.com/post-mt-log.png)
+
+
+### 5. Git图形化工具
+1. **Git for windows:：**下载git就会有的，包括git bash和git GUI两部分
+2. **Github desktop：** github出的图形化工具，但支持GitHub网站托管
+3. **SourceTree：**听说是最多人用的
+4. **Gitkraken：**我用的就是这个，感觉挺酷的(不过现在觉得命令行最酷~~)，对个人使用时免费的，用学校邮箱向github申请学生开发大礼包，可以升级到pro版
+
+
+### 6. 其他资源
+1. [shortcutfoo](https://www.shortcutfoo.com/)：这个网站可以练快捷键和命令行操作，除了git的，还能练vim、sublime、linux、Emacs等好多的快捷键
+2. [learnGitBranching](http://learngitbranching.js.org/)：左边敲指令，右边能图形化地显示逻辑，挺好的
+3. [Git Tutorial](https://try.github.io/levels/1/challenges/2)：这个和上面类似，所不同的是这个输完指令后，显示的是`.git`文件夹里的文件的变化，也是挺好的
+4. [git wiki](https://git.wiki.kernel.org/index.php/Main_Page)：所有的东西都能在这里查到大概
