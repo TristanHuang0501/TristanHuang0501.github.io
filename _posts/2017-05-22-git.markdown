@@ -53,7 +53,11 @@ $ ssh-keygen -t rsa -C "TristanHuang0501@gmail.com"
 ```
 $ git remote add origin git@github.com:TristanHuang0501/TristanHuang0501.github.io.git
 ```
-2. 本地推送至远程仓库：
+2. 删除本地绑定的远程仓库
+```
+$ git remote rm origin
+```
+3. 本地推送至远程仓库：
 ```
 $ git push -u origin master
 ```
