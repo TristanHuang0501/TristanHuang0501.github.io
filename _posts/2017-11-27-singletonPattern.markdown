@@ -1,4 +1,14 @@
-# Singleton Pattern 
+---
+layout:     post
+title:      "我，独一无二"
+subtitle:   理解 Singleton Pattern
+date:       2017-11-27
+author:     "Tristan"
+header-img: "img/post-bg-git.png"
+catalog:    true
+tags:
+- 设计模式
+---
 
 > 单件模式某种意义上来讲，可能是所有模式中最“单纯”的，因为她的类图只有一个类！尽管从类设计的角度来说很简单，但在实现上还是会遇到相当多的波折。 
 
