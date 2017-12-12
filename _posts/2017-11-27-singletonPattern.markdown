@@ -124,15 +124,73 @@ public class Singleton{
 
 真实的指令的粒度比上述过程更小，但是已经能够说明问题。由于操作非原子性，给了JVM重排序的机会。JVM重排序的原则是：在单线程中，不管怎么排，保证最终结果一致。然而，多线程下的指令重排序就给程序带来了很多问题。
 
-在上述过程中，假设程序刚开始运行在Thread1，如果第4步抢先执行了，此时instance非null，然后被Thread2抢占，此时`getInstance()`方法直接返回instance引用，然后使用，然后顺理成章地就报错了。
+在上述过程中，假设程序刚开始运行在Thread1，如果第4步抢先执行了，此时 instance 非 null ，然后被 Thread2 抢占，此时`getInstance()`方法直接返回instance引用，然后使用，然后顺理成章地就报错了。
 
 为了解决这个问题，我们用`volatile`来修饰instance变量声明，它的作用是：保证内存可见性，防止指令重排序，并不保证操作原子性。
 
 * 保证可见性：使用该变量必须重新去主内存读取，修改了该变量必须立刻刷新主内存。
 * 防止重排序：通过插入内存屏障，加入`volatile`之后查看汇编代码可以发现多了一句`lock addl $0x0,(%esp)`。
 
+所以我们加上`volatile`再写一遍：
+
+```java
+public class Singleton{
+	private Singleton(){}
+	private volatile static Singleton instance = null;
+
+	public static Singleton getInstance(){
+		if(instance == null){
+			synchronized(Singleton.class){
+				if(instance == null){
+					instance = new Singleton();
+				}
+			}
+		}
+		return instance;
+	}
+}
+```
+
+其实在 Java 5 以前的版本使用了`volatile`的双检锁还是有问题的。其原因是 Java 5 以前的 JMM （Java 内存模型）是存在缺陷的，即使将变量声明成`volatile`也不能完全避免重排序，主要是 volatile 变量前后的代码仍然存在重排序问题。这个 volatile 屏蔽重排序的问题在 Java 5 中才得以修复，所以在这之后才可以放心使用 volatile。
+
+
+### 5. 静态内部类
+
+使用静态内部类这种方法也是《Effective Java》上所推荐的：
+
+```java 
+public class Singleton {  
+    private Singleton (){} 
+
+    private static class SingletonHolder {  
+        private static final Singleton INSTANCE = new Singleton();  
+    }  
+     
+    public static final Singleton getInstance() {  
+        return SingletonHolder.INSTANCE; 
+    }  
+}
+```
+
+这种写法仍然使用JVM本身机制保证了线程安全问题；由于 SingletonHolder 是私有的，除了 getInstance() 之外没有办法访问它，因此它是懒汉式的；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖 JDK 版本。
+
+### 6. 枚举Enum
+
+简单是用枚举写单例的最大优点：
+
+```java
+public enum EasySingleton{
+    INSTANCE;
+}
+```
+
+我们可以通过EasySingleton.INSTANCE来访问实例，这比调用`getInstance()`方法简单多了。创建枚举默认就是线程安全的，所以不需要担心DCL，而且还能防止反序列化导致重新创建新的对象。但是还是很少看到有人这样写，可能是因为不太熟悉吧。
 
 ## 实际运用
+
+一般来说，单例模式有五种写法：懒汉、饿汉、双重检验锁、静态内部类、枚举。上述所说都是线程安全的实现，文章开头给出的第一种方法不算正确的写法。
+
+一般情况下直接使用饿汉式就好了，如果明确要求要懒加载（lazy initialization）可以于使用静态内部类，如果涉及到反序列化创建对象时可以使用枚举的方式来实现单例。
 
 ## 疑问
 
@@ -140,6 +198,7 @@ public class Singleton{
 - 全局变量比起单件模式来有哪些不足的地方？
 - 既然单件模式的构造器是私有的，那么是否还能够设计出她的子类，继承单件类？
 - 多个类加载器如何导致单件失效而产生多个实例？
+- 静态内部类有什么性质？
 
 ## 参考资料：
 
