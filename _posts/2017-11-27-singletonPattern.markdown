@@ -13,16 +13,124 @@ tags:
 > 单件模式某种意义上来讲，可能是所有模式中最“单纯”的，因为她的类图只有一个类！尽管从类设计的角度来说很简单，但在实现上还是会遇到相当多的波折。 
 
 
-&#160; &#160; &#160; &#160;在开发时，有一些对象其实我们只需要一个，比方说：线程池（threadpool）、缓存（cache)、对话框、处理偏好设置和注册表（registry）的对象、日志对象、充当打印机、显卡等设备的驱动程序的对象。事实上，这类对象只能有一个实例，如果制造出多个，就会导致许多的问题，例如：程序的行为异常、资源使用过量，或者是不一致的结果。
+在开发时，有一些对象其实我们只需要一个，比方说：线程池（threadpool）、缓存（cache)、对话框、处理偏好设置和注册表（registry）的对象、日志对象、充当打印机、显卡等设备的驱动程序的对象。事实上，这类对象只能有一个实例，如果制造出多个，就会导致许多的问题，例如：程序的行为异常、资源使用过量，或者是不一致的结果。
 
-&#160; &#160; &#160; &#160;使用单例模式可以很好地解决这个问题，除了保持对象的唯一性外，还能提供全局访问点，并且根据实现的方式的不同而具有如延迟实例化、改善多线程
+使用单例模式可以很好地解决这个问题，除了保持对象的唯一性外，还能提供全局访问点，并且根据实现的方式的不同而具有如延迟实例化、改善多线程
 
-&#160; &#160; &#160; &#160;先来看下单件模式的简单定义：
+先来看下单件模式的简单定义：
 > 单件模式确保一个类只有一个实例，并提供一个全局访问点。
 
 
 
 ## 写法
+
+### 1. 最简单的实现
+
+```java
+public class Singleton{
+	private Singleton(){}  //私有构造函数
+	private static Singleton instance = null; //单例对象
+	
+	public static Singleton getInstance(){
+		if(instance == null){
+			instance = new Singleton();
+		}
+		return instance;
+	} 
+} 
+```
+
+分析：
+
+* 要想一个类只能构造一个对象，自然不能随便去做new操作，因此Singleton类的构造方法是私有的。
+* 单例的初始值是null，还未构建时，调用getInstance()方法会构建单例对象并返回，这个写法属于懒加载模式（lazy initialization），即延迟实例化。
+
+
+### 2. 用饿汉模式保证线程安全
+
+```java
+public class Singleton{
+	private Singleton(){}  //私有构造函数
+	private static Singleton instance = new Singleton(); //类加载时就初始化
+	
+	public static Singleton getInstance(){
+		return instance;
+	} 
+} 
+```
+
+分析：
+
+* 编程时，我们必须认定所有的程序都是多线程的，否则线程会由于无法预料的数据变化而发生错误。当多个线程同时访问和修改相同的变量时，将会在串行编程模型中引入非串行因素，而这种非串行性是很难分析的。
+* 饿汉模式，即“急切地”创建实例，而不是延迟实例化。利用这个做法，我们依赖JVM在加载这个类时马上创建此唯一的单例实例，即使客户端没有调用`getInstance()`方法。
+* 缺点也恰恰是其是饿汉模式，而不是懒加载，这导致它在一些场景中将无法使用：譬如Singleton实例的创建是依赖参数或者配置文件的，在`getInstance()`之前必须调用某个方法设置参数给它，这样这种单例写法就无法使用了。
+
+### 3. synchronized关键字同步getInstance()
+
+```java
+public class Singleton{
+	private Singleton(){}  //私有构造函数
+	private static Singleton instance = null; //单例对象
+	
+	public static synchronized Singleton getInstance(){
+		if(instance == null){
+			instance = new Singleton();
+		}
+		return instance;
+	} 
+} 
+```
+
+分析：
+
+* 通过同步getInstance()方法从而在同一时间内只允许一个线程执行代码，可以实现线程安全。
+* 同步会降低性能。实际上，只有第一次执行此方法时，才真正需要同步，换句话说，多线程能够安全并发地执行除了第一次调用外的所有调用。此时，因为synchronized关键字，我们为该方法的每一次调用都要付出昂贵的同步代价，这就造成性能的很大下滑。
+* 同步的代价在不同的JVM中是不同的。在早期，代价相当高，随着更高级的JVM的出现，同步代价降低了，但出入synchronized方法或块仍然有性能损失。
+
+### 4. 双重检查加锁（DCL）
+
+双重检查加锁（Double checked locking，DCL）是一种使用同步块加锁的方法，之所以称其为双重检查锁，是因为会有两次检查`instance == null`，一次在同步块外，一次在同步块内。
+
+由上面的第一类最简单实现可知，懒汉模式下，问题就出在多个线程同时卡在`if`语句，然后线程恢复从断点处开始运行的时候造成了多个实例的产生。
+
+既然如此，我们只要保证在第一次执行时只有一个线程能进入第二个`if`检查语句即可，第一次检查是否已有实例有可能会产生误会，但是第二次检查我们保证了只有一个线程能进入，这样就保证了第一次执行的正确性，而后面就不需要同步了，这样就从理论角度很好地解决了上面的同步代价问题。
+
+```java
+public class Singleton{
+	private Singleton(){}
+	private static Singleton instance = null;
+
+	public static Singleton getInstance(){
+		if(instance == null){
+			synchronized(Singleton.class){
+				if(instance == null){
+					instance = new Singleton();
+				}
+			}
+		}
+		return instance;
+	}
+}
+```
+    
+然而上面的代码在实际的多线程环境中却很有可能失效，指令重排造成了这一切。直接的原因是在初始化一个对象并使一个对象引用指向他的整个过程不是原子的，导致了可能会出现引用指向对象并未初始化好的那块堆内存，详细解释一下，以`instance = new Singleton();`为例，这个操作可以拆分为：
+
+```
+//1. 栈内存开辟空间给instance引用
+//2. 堆内存开辟空间准备初始化对象
+//3. 调用Singleton的构造器初始化对象
+//4. 栈中引用指向这个堆内存空间地址（执行完这步instance就是非null的了）
+```
+
+真实的指令的粒度比上述过程更小，但是已经能够说明问题。由于操作非原子性，给了JVM重排序的机会。JVM重排序的原则是：在单线程中，不管怎么排，保证最终结果一致。然而，多线程下的指令重排序就给程序带来了很多问题。
+
+在上述过程中，假设程序刚开始运行在Thread1，如果第4步抢先执行了，此时instance非null，然后被Thread2抢占，此时`getInstance()`方法直接返回instance引用，然后使用，然后顺理成章地就报错了。
+
+为了解决这个问题，我们用`volatile`来修饰instance变量声明，它的作用是：保证内存可见性，防止指令重排序，并不保证操作原子性。
+
+* 保证可见性：使用该变量必须重新去主内存读取，修改了该变量必须立刻刷新主内存。
+* 防止重排序：通过插入内存屏障，加入`volatile`之后查看汇编代码可以发现多了一句`lock addl $0x0,(%esp)`。
+
 
 ## 实际运用
 
@@ -36,6 +144,7 @@ tags:
 ## 参考资料：
 
 - [漫画：什么是单例设计模式](http://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653192169&idx=1&sn=9c7c8c269b44443b5c4c6136529367c4&chksm=8c990d33bbee8425731a0ae76bd656a78e4fc9dddbe6c62ee77fc5686b35d001f9ced0980a3a&mpshare=1&scene=1&srcid=1127ZSP9IcnzmWHyT9d4jYxh#rd)
+- [如何正确地写出单例模式](http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/)
 
 
 ## 可以参考的写作素材
