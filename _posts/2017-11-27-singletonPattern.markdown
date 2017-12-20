@@ -4,7 +4,7 @@ title:      "我，独一无二"
 subtitle:   理解 Singleton Pattern
 date:       2017-11-27
 author:     "Tristan"
-header-img: "http://oqcr9s3uf.bkt.clouddn.com/post-bg-irobot.png"
+header-img: "img/post-bg-irobot.png"
 catalog:    true
 tags:
 - 设计模式
