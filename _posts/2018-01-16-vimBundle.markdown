@@ -127,6 +127,8 @@ let NERDTreeIgnore=['\.pyc','\~$','\.swp']
 let NERDTreeShowBookmarks=1
 ```
 
+更多详细的配置可以参考：[Vim之NERDTree帮助](http://www.cnblogs.com/mo-beifeng/archive/2011/09/08/2171018.html)
+
 ### 2. 搜索定位打开文件插件CtrlP
 在配置文件中添加 `Plugin 'kien/ctrlp.vim'` ，然后安装即可，效果如图所示
 ![CtrlP插件效果图](http://www.huangdc.com/wp-content/uploads/2016/06/ctrlp-vim-demo.gif)
