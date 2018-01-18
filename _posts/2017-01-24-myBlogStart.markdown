@@ -91,11 +91,12 @@ Jekyll 本身不支持 emoji，不过有个插件可以使它支持 emoji 表情
 所有支持的表情：[EMOJI CHEAT SHEET](https://www.webpagefx.com/tools/emoji-cheat-sheet/)
 
 #### 6.3 引入百度统计
-2017/04/10：<br/>
-引入了百度统计
+2017/04/10： 引入了百度统计
 
-#### 6.4 使用Rouge获取语法高亮样式表
-2018/01/18：<br/>
+#### 6.4 代码块显示优化
+2018/01/18： 调整了行间距、语法高亮、滚动条美化等
+
+##### 6.4.1 使用Rouge获取语法高亮样式表
 之前的语法高亮用了一年，感觉不太好看，然后就寻思着换一下。我使用的代码高亮器是Rouge。Rouge是一个纯Ruby编写的代码高亮器，可用于60多种语言的高亮，其源代码托管在GitHub上，我们可以通过它来生成不同的样式表。
 
 首先安装Rouge，然后生成对应主题的css文件
@@ -115,6 +116,40 @@ $ rougify style (theme_name) > (css_file.css)
 pre[class='highlight'] {background-color:#272822;}
 ```
 
+##### 6.4.2 bug修复记录
+同时发现了一个以前没有发现的问题，就是在代码块中，我的方法注释如果是多行的话，在本地jekyll解释后是没问题的，但是上传到github上显示就会出现不换行的问题，分析网页的源文件，发现不知道为什么包着代码块的div中又多了一层div，所以我只能在css中用选择器使第二层的div设置了一下`white-space: pre`，然后就可以换行了。
+
+##### 6.4.3 代码块滚动条优化
+原来的滚动条太丑了，简直不能看，花了点功夫优化了一下，但是只能在webkit内核的浏览器上显示目前应该，没有做兼容性处理，主要增加了如下的css：
+```css
+/* 设置垂直滚动条的宽度和水平滚动条的高度 */
+.highlight::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+
+/* 设置滚动条的滑轨 */
+.highlight::-webkit-scrollbar-track {
+      background-color: #ddd;
+}
+
+/* 滑块 */
+.highlight::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+}
+
+ /* 滑轨两头的监听按钮 */
+.highlight::-webkit-scrollbar-button {
+    background-color: #888;
+    display: none;
+}
+
+/* 横向滚动条和纵向滚动条相交处尖角 */
+.highlight::-webkit-scrollbar-corner {
+    /*background-color: black;*/
+}
+```
 
 
 ### 7. 感言
