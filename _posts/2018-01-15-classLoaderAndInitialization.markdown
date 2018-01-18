@@ -4,7 +4,7 @@ title:      Java类加载及对象初始化分析
 subtitle:   结合JVM探究初始化过程
 date:       2017-11-23
 author:     "Tristan"
-header-img: "img/post-bg-irobot.png"
+header-img: "img/post-bg-classloader.png"
 catalog:    true
 tags:
 - Java
