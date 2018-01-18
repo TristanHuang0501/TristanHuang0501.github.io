@@ -68,9 +68,18 @@ SQLite具有以下几种常用的数据类型：
 #### 查询数据
 一般通过cursor来得到查询数据，而且调用rawQuery来查询
 需要特别注意的是在Android中查询数据是通过Cursor类来实现的，当我们使用SQLiteDatabase.query()方法时，会得到一个Cursor对象，Cursor指向的就是每一条数据。它提供了很多有关查询的方法。具体的方法如下：
-	
-	public  Cursor query(String table,String[] columns,String selection,String[]  selectionArgs,String groupBy,String having,String orderBy,String limit);
-
+```java
+public  Cursor query(
+	String table, 
+	String[] columns,
+	String selection, 
+	String[]  selectionArgs, 
+	String groupBy, 
+	String having, 
+	String orderBy, 
+	String limit
+);
+```
 Cursor是一个游标接口，提供了遍历查询结果的方法，如移动指针方法move()，获得列值方法getString()等
 
 ```java
@@ -95,9 +104,9 @@ while (cursor.moveToNext()){
 该类是SQLiteDatabase一个辅助类。这个类主要生成一 个数据库，并对数据库的版本进行管理。当在程序当中调用这个类的方法getWritableDatabase()或者 getReadableDatabase()方法的时候，如果当时没有数据，那么Android系统就会自动生成一个数据库。 
 
 **SQLiteOpenHelper 是一个抽象类，我们通常需要继承它**，并且实现里面的3个函数：
-1. `onCreate（SQLiteDatabase）`在数据库第一次生成的时候会调用这个方法，也就是说，只有在创建数据库的时候才会调用，当然也有一些其它的情况，一般我们在这个方法里边生成数据库表。
-2. ` onUpgrade（SQLiteDatabase，int，int）`当数据库需要升级的时候，Android系统会主动的调用这个方法。一般我们在这个方法里边删除数据表，并建立新的数据表，当然是否还需要做其他的操作，完全取决于应用的需求。
-3. `onOpen（SQLiteDatabase）`这是当打开数据库时的回调函数，一般在程序中不是很常使用。
+1. `onCreate(SQLiteDatabase)`在数据库第一次生成的时候会调用这个方法，也就是说，只有在创建数据库的时候才会调用，当然也有一些其它的情况，一般我们在这个方法里边生成数据库表。
+2. `onUpgrade(SQLiteDatabase，int，int)`当数据库需要升级的时候，Android系统会主动的调用这个方法。一般我们在这个方法里边删除数据表，并建立新的数据表，当然是否还需要做其他的操作，完全取决于应用的需求。
+3. `onOpen(SQLiteDatabase)`这是当打开数据库时的回调函数，一般在程序中不是很常使用。
 
 
 #### SQLite的事务

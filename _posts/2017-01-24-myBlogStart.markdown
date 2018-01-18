@@ -155,3 +155,8 @@ pre[class='highlight'] {background-color:#272822;}
 ### 7. 感言
 快过年啦，在年前终于把自己的小阵地打造好了，虽然我只是做了一点点的小工作，但还是有收获的。
 祝大家鸡年大吉......吧 :)
+
+
+### 8. 下一步修改计划
+行号问题：
+: 代码块中行号的美化显示，看到stackoverflow上有讨论：[Enabling line numbers with rouge #4619](https://github.com/jekyll/jekyll/issues/4619)，但试了一下，发现巨丑，回头再解决一下看看。

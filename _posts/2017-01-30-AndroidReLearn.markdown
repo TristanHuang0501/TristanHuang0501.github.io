@@ -11,7 +11,7 @@ tags:
 ---
 
 
-### 虚拟机
+### 1. 虚拟机
  **认知：**ART是趋势，DalVik已经慢慢在被淘汰
  
  > ART，即Android Runtime。ART 的机制与 Dalvik 不同。在Dalvik下，应用每次运行的时候，字节码都需要通过即时编译器（just in time ，JIT）转换为机器码，这会拖慢应用的运行效率，而在ART 环境中，应用在第一次安装的时候，字节码就会预先编译成机器码，使其成为真正的本地应用。这个过程叫做预编译（AOT,Ahead-Of-Time）。这样的话，应用的启动(首次)和执行都会变得更加快速。
@@ -20,18 +20,18 @@ tags:
 
 ------------
 
-### 相关资源
+### 2. 相关资源
 - [google开发者网站](https://developer.android.com/index.html)
 - [Android中文api](www.android-doc.com)
 - [App code](http://appxcode.com)：有很多好的轮子
 
 ------------
 
-### 组件
+### 3. 组件
 
-#### Button
+#### 3.1 Button
 
-##### Button点击事件触发的两种方法：
+##### 3.1.1 Button点击事件触发的两种方法：
 1. 在activity中`bt.setOnClickListener(new onClickListener())`
 2. 在layout中，bt设置一个属性`android:onClick = "something"`，然后在activity中定义一个同名的方法`public void something(View v){}`这个方法所接收的参数为一个View对象，当按钮被按下时，系统会调用这个`something()`方法
 
@@ -39,7 +39,7 @@ tags:
 
 有一个疑问就是：共用监听or单独监听（每个button一个内部类）or在layout中设置`onClick`这几种方式在消耗内存上有啥区别？
 
-##### 设置半透明度
+##### 3.1.2 设置半透明度
 - 在xml文件中：
     - 半透明：`<Button android:background="#e0000000" ... /> `
     - 透明：`<Button android:background="#00000000" ... />`
@@ -55,10 +55,10 @@ tags:
 
 -------------
 
-### 布局
+### 4. 布局
 开发中用的最多的是`linearlayout`和`relativelayout`
 
-#### LinearLayout
+#### 4.1 LinearLayout
 
 > 单纯线性布局永远不会发生组件的重叠
 
@@ -72,13 +72,13 @@ tags:
 参考：
 [LinearLayout的layout_weight属性](http://www.cnblogs.com/JohnTsai/p/4077183.html)
 
-#### RelativeLayout
+#### 4.2 RelativeLayout
 在`relativelayout`中默认的对齐方式是左对齐和顶部对齐，可以通过设置`android:layout_align*="true"("id")`或者`layout_above="id"`或者`layout_toLeftOf="@id/*"`等属性来改变，而居中等可以通过`android:centerIn*`来设置
 
 假设有两个对象（id分别为tv1和tv2）第二个对象设置了两个属性`alignRight="@id/tv1"`、`alignLeft="@id/tv1"`，那么第二个对象就会和第一个对象**等宽**
 
 
-#### FrameLayout
+#### 4.3 FrameLayout
 > 帧布局是五大布局中最简单的布局方式，在需要布局中有空间重叠的情况下才使用。
 > `frameLayout`中的所有视图都已以层叠的方式展现的。第一个添加到布局中的视图显示在最底层，最后一个被放在最顶层。上一层的视图会覆盖下一层的视图，因此该布局类似于堆栈布局。
 
@@ -90,7 +90,7 @@ tags:
 - 如果以图片作为`linearLayout`的背景，那么将无法控制布局的高和宽，其尺寸会不受控制地适应图片的大小，因此采用`frameLayout`配合`imageView`添加可大小可控的背景
 
 
-#### TableLayout
+#### 4.4 TableLayout
 
 ```xml
 <TableLayout>
@@ -114,18 +114,18 @@ tags:
 
 -------------
 
-### 读写文件
+### 5. 读写文件
 > 存储空间包括内部存储空间和外部存储空间
 
-#### 内部存储空间(ROM)
+#### 5.1 内部存储空间(ROM)
 内部存储读写文件不需要权限，因为只能写自己包内的文件，其他包不能动，除非有root权限
-##### 绝对路径
+##### 5.1.1 绝对路径
 ```
 File file = new File("data/data/com.example.*/file");
 FileOutputStream fos = new FileOutStream(file);
 fos.write(string.getBytes());
 ```
-##### 使用路径api
+##### 5.1.2 使用路径api
 可以通过`getFilesDir()`来获得`data/data/com.example.*/file`文件夹的路径.，所以可以这样写：
 
   File file = new File(getFilesDir(),"name.txt");
@@ -136,14 +136,14 @@ fos.write(string.getBytes());
 从源码看，两者的区别是：当rom空间不够的时候，cache文件夹中的东西有可能会被系统删除，但是不能指望系统去删除，应该自己设置一个阈值
 在设置中点击存储，选择相应的应用，可以选择**清除缓存**和**清除数据**，前者会清空cache文件夹中的所有文件，而后者会删除包内所有的用户文件
 
-#### 外部存储读写（sd卡）
+#### 5.2 外部存储读写（sd卡）
 外部存储写数据需要权限`WRITE_EXTERNAL_STORAGE`，而读数据则不一定，要看开发者选项里面是否勾选了sd卡读写保护
-##### 绝对路径
+##### 5.2.1 绝对路径
 各个厂商的sd卡的路径差不多都不一样，要注意
 
     File file = new File("sdcard/file.*")
 
-##### 使用路径api
+##### 5.2.2 使用路径api
 这个api名字突出一个长啊，使用之前先判断sd卡是否可用
 
     if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
@@ -160,13 +160,13 @@ fos.write(string.getBytes());
 |`MOUNTED`|sd卡准备就绪，可以读写|
 |`MOUNTED_READ_ONLY`|sd卡可用，但是只读|
 
-##### 获取sd卡的剩余空间
+##### 5.2.3 获取sd卡的剩余空间
 可以参看**设置**系统应用的源码，放在`package/apps/Settings`中，具体用的时候可以google找轮子
   
     sd卡存储空间 = 可用的区块数量*区块大小（blockSize）
 
 
-#### 文件访问权限
+#### 5.3 文件访问权限
 
 > **权限的表现形式：**
 > `d rwx rwx rwx`        一共十位
@@ -200,7 +200,7 @@ public void bt_click(View v){
 
 ![@openFileOutput方法](https://github.com/TristanHuang0501/TristanHuang0501.github.io/raw/master/img/in-post/post-android-openFileOutput.png)
 
-#### 使用Shared Preference存取简单数据
+#### 5.4 使用Shared Preference存取简单数据
 
 > SharedPreferences的使用非常简单，能够轻松的存放数据和读取数据。SharedPreferences只能保存简单类型的数据，例如，String、int等。一般会将复杂类型的数据转换成Base64编码，然后将转换后的数据以字符串的形式保存在 XML文件中，再用SharedPreferences保存。
 
@@ -212,7 +212,7 @@ public void bt_click(View v){
 -----------
 
 
-### 调试时的小技巧
+### 6. 调试时的小技巧
 1. **真机调试时eclipse的file explorer打不开data文件夹：**
 当用真机开发Android时，连接了Eclipse后，默认在File Explorer下是达不开我们手机的data文件夹的，这里打不开是因为权限不足。以下有个小技巧可以解决这问题。
 首先，测试机先root，然后在手机上安装上Root Explorer 管理器（或类似软件），再将/data/data及其子文件夹下的访问权限都修改为可读可写可执行即可。这时候再使用eclipse的File Explorer就可以展开了，这时候就可以查看应用下的SQLite数据库了。
