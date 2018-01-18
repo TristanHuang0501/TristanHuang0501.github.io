@@ -10,7 +10,7 @@
   background-color:#272822;
 }
 
-.highlight pre code {
+.highlight pre code div{
   white-space: pre;       // forces <code> to respect <pre> formatting
 }
 
