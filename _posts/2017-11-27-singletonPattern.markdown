@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "我，独一无二"
-subtitle:   理解 Singleton Pattern
+title:      Singleton单例模式探讨
+subtitle:   我，独一无二
 date:       2017-10-27
 author:     "Tristan"
 header-img: "img/post-bg-irobot.png"
@@ -23,9 +23,9 @@ tags:
 
 
 
-## 写法
+### 写法
 
-### 1. 最简单的实现
+#### 1. 最简单的实现
 
 ```java
 public class Singleton{
@@ -48,7 +48,7 @@ public class Singleton{
 * 但是延迟实例化带来的隐患就是带来“先检查后执行”的竞态条件，即基于一种可能失效的观察结果（`if(instance == null`）来做出判断或者执行某个计算（`instance = new Singleton()`）。
 
 
-### 2. 用饿汉模式保证线程安全
+#### 2. 用饿汉模式保证线程安全
 
 ```java
 public class Singleton{
@@ -67,7 +67,7 @@ public class Singleton{
 * 饿汉模式，即“急切地”创建实例，而不是延迟实例化。利用这个做法，我们依赖JVM在加载这个类时马上创建此唯一的单例实例，即使客户端没有调用`getInstance()`方法。
 * 缺点也恰恰是其是饿汉模式，而不是懒加载，这导致它在一些场景中将无法使用：譬如Singleton实例的创建是依赖参数或者配置文件的，在`getInstance()`之前必须调用某个方法设置参数给它，这样这种单例写法就无法使用了。
 
-### 3. synchronized关键字同步getInstance()
+#### 3. synchronized关键字同步getInstance()
 
 ```java
 public class Singleton{
@@ -89,7 +89,7 @@ public class Singleton{
 * 此时我们面对的就是一个性能问题，而不是线程安全问题：同步会降低性能。实际上，只有第一次执行此方法时，才真正需要同步，换句话说，多线程能够安全并发地执行除了第一次调用外的所有调用。此时，因为synchronized关键字，我们为该方法的每一次调用都要付出昂贵的同步代价，这就造成性能的很大下滑，是一种不良并发（Poor Concurrency）。
 * 同步的代价在不同的JVM中是不同的。在早期，代价相当高，随着更高级的JVM的出现，同步代价降低了，但出入synchronized方法或块仍然有性能损失。
 
-### 4. 双重检查加锁（DCL）
+#### 4. 双重检查加锁（DCL）
 
 双重检查加锁（Double checked locking，DCL）是一种使用同步块加锁的方法，之所以称其为双重检查锁，是因为会有两次检查`instance == null`，一次在同步块外，一次在同步块内。
 
@@ -163,7 +163,7 @@ public class Singleton{
 其实在 Java 5 以前的版本使用了`volatile`的双检锁还是有问题的。其原因是 Java 5 以前的 JMM （Java 内存模型）是存在缺陷的，即使将变量声明成`volatile`也不能完全避免重排序，主要是 volatile 变量前后的代码仍然存在重排序问题。这个 volatile 屏蔽重排序的问题在 Java 5 中才得以修复，所以在这之后才可以放心使用 volatile。
 
 
-### 5. 静态内部类
+#### 5. 静态内部类
 
 使用静态内部类这种方法也是《Effective Java》上所推荐的：
 
@@ -183,7 +183,7 @@ public class Singleton {
 
 这种写法仍然使用JVM本身机制保证了线程安全问题；由于 SingletonHolder 是私有的，除了 getInstance() 之外没有办法访问它，因此它是懒汉式的；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖 JDK 版本。
 
-### 6. 枚举Enum
+#### 6. 枚举Enum
 
 简单是用枚举写单例的最大优点：
 
@@ -195,13 +195,13 @@ public enum EasySingleton{
 
 我们可以通过EasySingleton.INSTANCE来访问实例，这比调用`getInstance()`方法简单多了。创建枚举默认就是线程安全的，所以不需要担心DCL，而且还能防止反序列化导致重新创建新的对象。但是还是很少看到有人这样写，可能是因为不太熟悉吧。
 
-## 实际运用
+### 实际运用
 
 一般来说，单例模式有五种写法：懒汉、饿汉、双重检验锁、静态内部类、枚举。上述所说都是线程安全的实现，文章开头给出的第一种方法不算正确的写法。
 
 一般情况下直接使用饿汉式就好了，如果明确要求要懒加载（lazy initialization）可以于使用静态内部类，如果涉及到反序列化创建对象时可以使用枚举的方式来实现单例。
 
-## 疑问
+### 疑问
 
 - 类的单件和对象的单件有什么区别？
 - 全局变量比起单件模式来有哪些不足的地方？
@@ -209,13 +209,13 @@ public enum EasySingleton{
 - 多个类加载器如何导致单件失效而产生多个实例？
 - 静态内部类有什么性质？
 
-## 参考资料：
+### 参考资料：
 
 - [漫画：什么是单例设计模式](http://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653192169&idx=1&sn=9c7c8c269b44443b5c4c6136529367c4&chksm=8c990d33bbee8425731a0ae76bd656a78e4fc9dddbe6c62ee77fc5686b35d001f9ced0980a3a&mpshare=1&scene=1&srcid=1127ZSP9IcnzmWHyT9d4jYxh#rd)
 - [如何正确地写出单例模式](http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/)
 
 
-## 可以参考的写作素材
+### 可以参考的写作素材
 
 - 《我，机器人》独一无二
 - One一个 app
