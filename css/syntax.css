@@ -10,7 +10,8 @@
   background-color:#272822;
 }
 
-.highlight pre code div{
+
+.highlight pre code {
   white-space: pre;       // forces <code> to respect <pre> formatting
 }
 
@@ -46,6 +47,7 @@
 }
 .highlight .cm {
   color: #75715e;
+  white-space: pre;
 }
 .highlight .cp {
   color: #75715e;
