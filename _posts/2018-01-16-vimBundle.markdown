@@ -80,63 +80,114 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 call vundle#end()
 ```
-NERDTree的一些基本操作快捷键：
+NERDTree关于切换工作台和目录的快捷键：
 ```
-?: 快速帮助文档
-o: 打开一个目录或者打开文件，创建的是buffer，也可以用来打开书签
-go: 打开一个文件，但是光标仍然留在NERDTree，创建的是buffer
-t: 打开一个文件，创建的是Tab，对书签同样生效
-T: 打开一个文件，但是光标仍然留在NERDTree，创建的是Tab，对书签同样生效
-i: 水平分割创建文件的窗口，创建的是buffer
-gi: 水平分割创建文件的窗口，但是光标仍然留在NERDTree
-s: 垂直分割创建文件的窗口，创建的是buffer
-gs: 和gi，go类似
-x: 收起当前打开的目录
-X: 收起所有打开的目录
-e: 以文件管理的方式打开选中的目录
-D: 删除书签
-P: 大写，跳转到当前根路径
-p: 小写，跳转到光标所在的上一级路径
-K: 跳转到第一个子路径
-J: 跳转到最后一个子路径
-<C-j>和<C-k>: 在同级目录和文件间移动，忽略子目录和子文件
-C: 将根路径设置为光标所在的目录
-u: 设置上级目录为根路径
-U: 设置上级目录为跟路径，但是维持原来目录打开的状态
-r: 刷新光标所在的目录
-R: 刷新当前根路径
-I: 显示或者不显示隐藏文件
-f: 打开和关闭文件过滤器
-q: 关闭NERDTree
-A: 全屏显示NERDTree，或者关闭全屏
+ctrl + w + h    光标 focus 左侧树形目录
+ctrl + w + l    光标 focus 右侧文件显示窗口
+ctrl + w + w    光标自动在左右侧窗口切换
+ctrl + w + r    移动当前窗口的布局位置
 ```
 
+```
+o       在已有窗口中打开文件、目录或书签，并跳到该窗口
+go      在已有窗口 中打开文件、目录或书签，但不跳到该窗口
+t       在新 Tab 中打开选中文件/书签，并跳到新 Tab
+T       在新 Tab 中打开选中文件/书签，但不跳到新 Tab
+i       split 一个新窗口打开选中文件，并跳到该窗口
+gi      split 一个新窗口打开选中文件，但不跳到该窗口
+s       vsplit 一个新窗口打开选中文件，并跳到该窗口
+gs      vsplit 一个新 窗口打开选中文件，但不跳到该窗口
+
+e:      以文件管理的方式打开选中的目录
+i:      执行当前文件
+D:      删除书签
+
+P:      跳到根结点 
+p:      跳到父节点
+K:      跳到当前目录下同级的第一个结点
+J:      跳到当前目录下同级的最后一个结点 
+
+C       将选中目录或选中文件的父目录设为根结点
+u       将当前根结点的父目录设为根目录，并变成合拢原根结点
+U       将当前根结点的父目录设为根目录，但保持展开原根结点
+r       递归刷新选中目录
+R       递归刷新根结点
+cd      将 CWD 设为选中目录
+
+I       切换是否显示隐藏文件
+f       切换是否使用文件过滤器
+F       切换是否显示文件
+B       切换是否显示书签
+
+q       关闭 NerdTree 窗口
+A       全屏显示NERDTree，或者关闭全屏
+?       切换是否显示 Quick Help
+
+:NERDTree Z:\    切换NERDTree的盘符到Z盘
+```
+切换标签页指令：
+```
+:tabnew [++opt选项] ［＋cmd］ 文件      建立对指定文件新的tab
+:tabc   关闭当前的 tab
+:tabo   关闭所有其他的 tab
+:tabs   查看所有打开的 tab
+:tabp   前一个 tab
+:tabn   后一个 tab
+
+标准模式下：
+gT      前一个 tab
+gt      后一个 tab
+```
 可以在`_vimrc`文件中添加NERDTree的配置，比如说：
 ```
 " 关闭NERDTree快捷键
 map <leader>t :NERDTreeToggle<CR>
+
 " 显示行号
 let NERDTreeShowLineNumbers=1
 let NERDTreeAutoCenter=1
+
 " 是否显示隐藏文件
 let NERDTreeShowHidden=1
+
 " 设置宽度
 let NERDTreeWinSize=21
+
 " 在终端启动vim时，共享NERDTree
 let g:nerdtree_tabs_open_on_console_startup=1
+
 " 忽略一下文件的显示
 let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+
+" 按下 F2 调出/隐藏 NERDTree
+map  :silent! NERDTreeToggle
+
+" 将 NERDTree 的窗口设置在 vim 窗口的右侧（默认为左侧）
+let NERDTreeWinPos="right"
+
 " 显示书签列表
 let NERDTreeShowBookmarks=1
 ```
 
 更多详细的配置可以参考：[Vim之NERDTree帮助](http://www.cnblogs.com/mo-beifeng/archive/2011/09/08/2171018.html)
 
-#### 3.2 搜索定位打开文件插件CtrlP
+#### 3.2 搜索定位打开文件插件 CtrlP
 在配置文件中添加 `Plugin 'kien/ctrlp.vim'` ，然后安装即可，效果如图所示
 ![CtrlP插件效果图](http://www.huangdc.com/wp-content/uploads/2016/06/ctrlp-vim-demo.gif)
 
-#### 3.3 配色插件colorscheme
+#### 3.3 状态栏插件 vim-airline
+在`_vimrc`文件中添加如下两句即可：
+```
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+```
+此时是有很多内置的主题的，可以直接使用，方法是在配置文件中写
+```
+let g:airline_theme="solarized"
+```
+其中"solarized"指定了主题，也可以在vim中输入指令`:AirlineTheme solarized"即可马上更改，但是是一次性的，关闭vim后就恢复原状了。
+
+### 4. Vim配色colorscheme
 在vim安装目录下有个colors文件夹，里面存放的就是各种colorscheme，选择好相应的主题后，到`_vimrc`文件中设置，比如说选择 desert 主题，只需添加如下一句：
 ```
 colorscheme desert
@@ -146,9 +197,9 @@ colorscheme desert
 
 实在想作还可以自己写，也不复杂，也就几个参数调教一下就好了，不过我还没折腾。reddit 上也有一个关于创建 Colorscheme 的讨论：[Creating Your Lovely Color Scheme](https://www.reddit.com/r/vim/comments/7auw18/creating_your_lovely_color_scheme_vimconf2017/)
 
-### 4. 可能出现的问题
+### 5. 可能出现的问题
 1. 输入 `:BundleInstall` 指令后报错："unknown function: vundle#installer#new"，可以参考这里 [vim插件vundle/bundle安装错误小结](https://segmentfault.com/a/1190000003795535)
 
-### 5. 参考资料：
+### 6. 参考资料：
 - [全世界最好的编辑器VIM之Windows配置篇](http://www.huangdc.com/421)
 - [改变vim配色：安装colorscheme](http://blog.csdn.net/simple_the_best/article/details/51901361)

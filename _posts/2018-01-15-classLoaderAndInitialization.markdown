@@ -139,6 +139,38 @@ public class SubClass extends Parent {
 - 父类优于子类，静态优于非静态，只有在第一次创建对象的时候才会初始化静态块和静态成员。
 - 当父类和子类的静态内容都初始化好后，就可以开始调用静态方法了，进一步说明静态方法的调用不依赖于具体的类。
 
+有了上面的基础之后，我们再来分析一道题目：
+```java
+public class Base{
+    private String baseName = "base";
+    public Base(){
+        callName();
+    }
+ 
+    public void callName(){
+        System. out. println(baseName);
+    }
+ 
+    static class Sub extends Base{
+        private String baseName = "sub";
+        public void callName()
+        {
+            System. out. println (baseName) ;
+        }
+    }
+    public static void main(String[] args){
+        Base b = new Sub();
+    }
+}
+```
+这里程序输出的结果是 base 还是 sub 呢？
+
+答案是都不是，结果应该是 null 。为什么？`Base b = new Sub();` 它为多态的一种表现形式，声明是 Base ，实现是 Sub 类，理解为 b 编译时表现为 Base 类特性，运行时表现为 Sub 类特性。
+
+当子类覆盖了父类的方法后，意思是父类的方法已经被重写，题中**父类初始化调用的方法为子类实现的方法，子类实现的方法中调用的`baseName`为子类中的私有属性。**
+
+参照本节的初始化顺序，此时只运行到步骤4，子类的非静态代码块和初始化步骤还没有到，子类中的`baseName`还没有被初始化。所以此时`baseName`为空，所以结果应该是null。
+
 ### 2. 类加载的过程
 看了上面的例程，我们不禁要产生疑问：为什么会是这样的一个顺序呢？这就要从类在JVM中的加载过程说起。
 #### 2.1 类的生命周期
