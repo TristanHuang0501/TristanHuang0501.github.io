@@ -139,7 +139,38 @@ public class SubClass extends Parent {
 - 父类优于子类，静态优于非静态，只有在第一次创建对象的时候才会初始化静态块和静态成员。
 - 当父类和子类的静态内容都初始化好后，就可以开始调用静态方法了，进一步说明静态方法的调用不依赖于具体的类。
 
-有了上面的基础之后，我们再来分析一道题目：
+#### 1.3 两道典型面试题
+有了上面的基础之后，让我们来分析两道题目，首先：
+```java
+class X{
+    Y y=new Y();
+    public X(){
+        System.out.print("X");
+    }
+}
+class Y{
+    public Y(){
+        System.out.print("Y");
+    }
+}
+public class Z extends X{
+    Y y=new Y();
+    public Z(){
+        System.out.print("Z");
+    }
+    public static void main(String[] args) {
+        new Z();
+    }
+}
+```
+这题的主要困惑点在于子类Z和父类Z有一个成员是同名的，所以会因为子类是否会覆盖父类成员而困扰，但其实即使子类声明了与父类完全一样的成员变量，也不会覆盖掉父类的成员变量。而是在子类实例化时，会同时定义两个成员变量，子类也可以同时访问到这两个成员变量，但父类不能访问到子类的成员变量（父类不知道子类的存在）。
+
+关于这个问题，不是我们这里关注的重点，可以参考如下博客：
+- [Java：子类“覆盖”父类的成员变量](https://www.polarxiong.com/archives/JAVA-%E5%AD%90%E7%B1%BB-%E8%A6%86%E7%9B%96-%E7%88%B6%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.html)
+- [Java子类父类属性的覆盖](gaolixu.iteye.com/blog/363709)
+
+解决了这个困扰，我们可以很快给出答案：YXYZ。然后再看后面一道比较难一点的：
+
 ```java
 public class Base{
     private String baseName = "base";
