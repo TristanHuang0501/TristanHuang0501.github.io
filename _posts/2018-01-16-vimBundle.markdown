@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Vim编辑器Windows配置
+title:      Vim编辑器Windows配置(一)
 subtitle:   有一种信仰叫做vim
 date:       2018-01-17
 author:     "Tristan"
@@ -111,7 +111,7 @@ C       将选中目录或选中文件的父目录设为根结点
 u       将当前根结点的父目录设为根目录，并变成合拢原根结点
 U       将当前根结点的父目录设为根目录，但保持展开原根结点
 r       递归刷新选中目录
-R       递归刷新根结点
+R       递归iii<F8>刷新根结点
 cd      将 CWD 设为选中目录
 
 I       切换是否显示隐藏文件
@@ -186,6 +186,35 @@ Plugin 'vim-airline/vim-airline-themes'
 let g:airline_theme="solarized"
 ```
 其中"solarized"指定了主题，也可以在vim中输入指令`:AirlineTheme solarized"即可马上更改，但是是一次性的，关闭vim后就恢复原状了。
+
+#### 3.4 导航插件 tagbar
+Tagbar和Taglist很相似，都是展示当前文件Symbol的插件，但是两者的关注点不同，总得来说Tagbar对面向对象的支持更好，它会自动根据文件修改的时间来重新排列Symbol的列表。
+
+网上大部分的博文都是在nuix系统下的安装，我这里整理一份windows下安装的步骤：
+
+##### 3.4.1 安装 Exuberant ctags
+tagbar 正常工作依赖于 vim 和 [Exuberant ctags](http://ctags.sourceforge.net/)。下载后将`ctags.exe`文件放在一个在PATH环境变量的文件夹里，或者直接就新加一个路径。
+
+##### 3.4.2 安装 tagbar
+在配置文件中加入：
+```
+"文件侦查启动,用以检测文件的后缀  
+filetyp on  
+"安装tagbar插件  
+Plugin 'majutsushi/tagbar'  
+"设置tagbar使用的ctags的插件,必须要设置对  
+let g:tagbar_ctags_bin='XXX_youpath/ctags'  
+"设置tagbar的窗口宽度  
+let g:tagbar_width=30  
+"设置tagbar的窗口显示的位置,为左边  
+let g:tagbar_left=1  
+" autofocus on tagbar open
+let g:tagbar_autofocus=1
+"映射tagbar的快捷键  
+map <F8> :TagbarToggle<CR>  
+"打开文件自动 打开tagbar  
+autocmd BufReadPost *.java call tagbar#autoopen()  
+```
 
 ### 4. Vim配色colorscheme
 在vim安装目录下有个colors文件夹，里面存放的就是各种colorscheme，选择好相应的主题后，到`_vimrc`文件中设置，比如说选择 desert 主题，只需添加如下一句：

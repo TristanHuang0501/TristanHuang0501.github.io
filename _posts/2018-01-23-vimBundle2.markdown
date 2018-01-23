@@ -1,0 +1,26 @@
+---
+layout:     post
+title:      Vim编辑器Windows配置(二)
+subtitle:   更多life-change级的vim插件
+date:       2018-01-23
+author:     "Tristan"
+header-img: "img/post-bg-vim.png"
+catalog:    true
+tags:
+- vim 
+---
+
+### 1. 前言 
+注意：安装vundle前提需要先安装git和配置curl
+
+在初步装配了神器vim之后，我们需要更强大的工具来升级它，当然这些工具也会更加地难装一些，实现自主化个性化的学习曲线也会更加陡峭一点。
+
+### 2. ultiSnips
+
+暂时先记录一下引用的资料：
+
+出现的vim无法加载python的问题
+http://blog.csdn.net/LCAR_979/article/details/65659777
+
+默认的java代码块
+https://github.com/honza/vim-snippets/blob/master/snippets/java.snippets
