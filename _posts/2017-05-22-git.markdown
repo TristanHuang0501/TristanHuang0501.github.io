@@ -115,10 +115,11 @@ reset命令把当前分支指向另一个位置，并且有选择的变动工作
 #### 5. history区查看
 `$ git log`可以查看目前的历史区，找到对应的RSA，就可以checkout，但是往前回退会导致最新的一些commit信息没有了，这时候可以用`$ git  reflog`，可以看到所有操作对应的RSA，使用`$ gitk`可以看到时间表
 
-网上看到有些人对log做了个个性化的配置，觉得挺好看的，推荐一下
+网上看到有些人对log做了个个性化的配置，觉得挺好看的，推荐一下(windows 或者 OS X 系统通用)：
 ```
 $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 ```
+
 效果是这样的：
 ![Alt text](http://oqcr9s3uf.bkt.clouddn.com/post-mt-log.png)
 
