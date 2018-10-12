@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Android Bluetooth API
+title:      Android Bluetooth API (1)
 subtitle:   蓝牙的打开、发现、连接与管理
 date:       2018-10-12
 author:     "Tristan"
@@ -220,7 +220,7 @@ private class ConnectThread extends Thread {
 }
 ```
 
-### 5. 管理连接
+### 4. 管理连接
 在成功连接两台（或更多台）设备后，每台设备都会有一个已连接的 BluetoothSocket。 这一点非常有趣，因为这表示您可以在设备之间共享数据。 利用 BluetoothSocket，传输任意数据的一般过程非常简单：
 
 - 获取 InputStream 和 OutputStream，二者分别通过套接字以及 `getInputStream()` 和 `getOutputStream()` 来处理数据传输。

@@ -1,0 +1,331 @@
+---
+layout:     post
+title:      Android Bluetooth API (2)
+subtitle:   低功耗蓝牙 BLE
+date:       2018-10-12
+author:     "Tristan"
+header-img: "img/post-bg-androidstudio.jpg"
+catalog:    true
+tags:
+- Android
+- Bluetooth
+---
+
+> 主要是翻译了官方文档-[Bluetooth low energy overview](https://developer.android.com/guide/topics/connectivity/bluetooth-le)
+
+Android 4.3 (API level 18) 引入了对 BLE 的支持，提供了一系列的 API 来进行 discover devices, query for services, and transmit information。它的使用场景主要是：
+1. 邻近设备的小量数据传输
+2. 和附近的 Beacons 交互，来获得 LBS 服务，即基于位置的服务
+
+相比于 Classic Bluetooth， BLE 的功耗相当低，这使得 APP 可以和一些资源受限的设别交互，比如你的apple watch 啥的。
+
+### 1. 关键术语与概念
+还挺难理解的，这里说最主要的两个，其余的自己看[官方文档](https://developer.android.com/guide/topics/connectivity/bluetooth-le)：
+- **Generic Attribute Profile (GATT)**：用来定义在蓝牙连接中收发短报文的规范。所有的 BLE 应用都是基于 GATT 的。
+- **Attribute Protocol (ATT)**：GATT 构建在 ATT 之上。每一个 属性都被一个独特的 UUID 所标识。
+
+此外，当你用 Android 设备与一个 BLE 设备交互时，还需要理解以下的几种身份角色：
+- **Central vs. peripheral **：The device in the central role scans, looking for advertisement, and the device in the peripheral role makes the advertisement.
+- **GATT server vs. GATT client**：This determines how two devices talk to each other once they've established the connection.
+
+我们可以通过 iBeacon 提供的 LBS 服务来理解上述角色，当你拿着手机进入定位区域的时候，iBeacon 就相当于扮演了 peripheral device 的角色，而手机就是 central device。一个 BLE 连接只能发生在 central device 和 peripheral device 之间，而不能是相同角色之间。
+
+一旦连接建立，他们之间就开始传输 GATT 元数据，而是 GATT Server 还是 GATT Client 取决于它们的行为，当手机希望获取到 iBeacon 的相关信息的时候，ibeacon 就是server，当 ibeacon 希望从手机端获得更新服务的时候，那手机就扮演了 server 的角色。
+
+接下来的示例中，APP 中的代码就作为 GATT client，这个应用从 server 上获取数据， server 就假设为一个 BLE 心率监测仪吧。
+
+### 2. BLE权限
+上一篇已经说过，要操作蓝牙，需要先有以下两个权限
+```xml
+<uses-permission android:name="android.permission.BLUETOOTH"/>
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+```
+然后如果你的应用只想用在 BLE 的场合，那么还需要再 manifest 中添加以下的 feature：
+```xml
+<uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+```
+但是如果你想同时支持非 BLE 的设备，那么将上面的 true 改成 false 即可。在运行时，可以通过`PackageManager.hasSystemFeature()` 来确认 BLE 支持是否打开：
+```java
+// Use this check to determine whether BLE is supported on the device. Then
+// you can selectively disable BLE-related features.
+if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+    Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
+    finish();
+}
+```
+
+> 由于 LE Beacons 经常和 LBS 服务有关，为了使用 `BluetoothLeScanner`， 你需要拥有 `ACCESS_COARSE_LOCATION` or `ACCESS_FINE_LOCATION`  权限，否则 scan 会没有任何返回结果
+
+### 3. 设置 BLE
+在设置之前，首先需要确认设备是否支持 BLE ，而这种检查在 `<uses-feature.../>` 设置为 false 的时候才是有必要的。
+
+当确认 BLE 可用的情况下，分两步进行初始化设置：
+
+1. 获得`BluetoothAdapter`对象，Android 4.3 (API Level 18)之后引入 `BluetoothManager` 来获取适配器：
+	```java
+	private BluetoothAdapter mBluetoothAdapter;
+	...
+	// Initializes Bluetooth adapter.
+	final BluetoothManager bluetoothManager =
+	        (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+	mBluetoothAdapter = bluetoothManager.getAdapter();
+	```
+
+2. Enable Bluetooth：
+	```java
+	// Ensures Bluetooth is available on the device and it is enabled. If not,
+	// displays a dialog requesting user permission to enable Bluetooth.
+	if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+	    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		// The REQUEST_ENABLE_BT constant passed to startActivityForResult(android.content.Intent, int) is a locally-defined integer (which must be greater than 0) that the system passes back to you in your onActivityResult(int, int, android.content.Intent)
+	    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+	}
+	```
+
+### 4. 发现 BLE 设备
+通过 `BluetoothAdapter#startLeScan(BluetoothAdapter.LeScanCallback)` 方法来发现 BLE 设备。方法的入参是一个回调，你需要实现其中的方法：
+```java
+public interface LeScanCallback {
+    void onLeScan(BluetoothDevice var1, int var2, byte[] var3);
+}
+```
+
+由于 scan 是一个费电的操作，你的操作应该遵循以下两条：
+1. 一旦发现目标设备，停止扫描
+2. 不要不断遍历扫描，对 scan 设一个时间限制。由于设备是可能会离开连接区域的，这时候再去 scan 会造成电源浪费
+
+下面的示例展示了如何去开始和结束一个 BLE 发现的过程：
+```java
+/**
+ * Activity for scanning and displaying available BLE devices.
+ */
+public class DeviceScanActivity extends ListActivity {
+
+    private BluetoothAdapter mBluetoothAdapter;
+    private boolean mScanning;
+    private Handler mHandler;
+
+    // Stops scanning after 10 seconds.
+    private static final long SCAN_PERIOD = 10000;
+    ...
+    private void scanLeDevice(final boolean enable) {
+        if (enable) {
+            // Stops scanning after a pre-defined scan period.
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mScanning = false;
+                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                }
+            }, SCAN_PERIOD);
+
+            mScanning = true;
+            mBluetoothAdapter.startLeScan(mLeScanCallback);
+        } else {
+            mScanning = false;
+            mBluetoothAdapter.stopLeScan(mLeScanCallback);
+        }
+        ...
+    }
+...
+}
+```
+
+当然，如果你只想搜索特定类型的 BLE 服务，你可以调用 `startLeScan(UUID[], BluetoothAdapter.LeScanCallback)` 方法，由 UUID 来指定类型。
+
+这里也同时提供一份 BluetoothAdapter.LeScanCallback 的实现，用来传输扫描结果给 UI 线程：
+```java
+private LeDeviceListAdapter mLeDeviceListAdapter;
+...
+// Device scan callback.
+private BluetoothAdapter.LeScanCallback mLeScanCallback =
+        new BluetoothAdapter.LeScanCallback() {
+    @Override
+    public void onLeScan(final BluetoothDevice device, int rssi,
+            byte[] scanRecord) {
+        runOnUiThread(new Runnable() {
+           @Override
+           public void run() {
+               mLeDeviceListAdapter.addDevice(device);
+               mLeDeviceListAdapter.notifyDataSetChanged();
+           }
+       });
+   }
+};
+```
+
+**Note: **You can only scan for Bluetooth LE devices or scan for Classic Bluetooth devices, as described in Bluetooth. You cannot scan for both Bluetooth LE and classic devices at the same time.
+
+### 5. 连接到 GATT Server
+与 BLE 设备交互的第一步是建立连接，具体来说就是与 GATT Server 建立连接，这时我们可以调用`BluetoothDevice#connectGatt(android.content.Context, boolean, android.bluetooth.BluetoothGattCallback)`，该方法中的第二个参数是代表是否 autoConnect (boolean indicating whether to automatically connect to the BLE device as soon as it becomes available)。
+```java
+mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
+```
+
+获取到 BluetoothGatt 对象的实例后，我们就可以进行 GATT Client 端的各种操作。BluetoothGattCallback 则负责将结果发送给 client，比如说连接状态等。
+
+在下面的例子中，BLE app 的 activity (DeviceControlActivity)  负责连接、展示数据和展示 GATT services 的设备支持情况。根据用户的输入，该 activity 和一个 BluetoothLeService 进行交互，通过它去调用 BLE API 去和 BLE 设备交互。
+```java
+// A service that interacts with the BLE device via the Android BLE API.
+public class BluetoothLeService extends Service {
+    private final static String TAG = BluetoothLeService.class.getSimpleName();
+
+    private BluetoothManager mBluetoothManager;
+    private BluetoothAdapter mBluetoothAdapter;
+    private String mBluetoothDeviceAddress;
+    private BluetoothGatt mBluetoothGatt;
+    private int mConnectionState = STATE_DISCONNECTED;
+
+    private static final int STATE_DISCONNECTED = 0;
+    private static final int STATE_CONNECTING = 1;
+    private static final int STATE_CONNECTED = 2;
+
+    public final static String ACTION_GATT_CONNECTED =
+            "com.example.bluetooth.le.ACTION_GATT_CONNECTED";
+    public final static String ACTION_GATT_DISCONNECTED =
+            "com.example.bluetooth.le.ACTION_GATT_DISCONNECTED";
+    public final static String ACTION_GATT_SERVICES_DISCOVERED =
+            "com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED";
+    public final static String ACTION_DATA_AVAILABLE =
+            "com.example.bluetooth.le.ACTION_DATA_AVAILABLE";
+    public final static String EXTRA_DATA =
+            "com.example.bluetooth.le.EXTRA_DATA";
+
+    public final static UUID UUID_HEART_RATE_MEASUREMENT =
+            UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);
+
+    // Various callback methods defined by the BLE API.
+    private final BluetoothGattCallback mGattCallback =
+            new BluetoothGattCallback() {
+        @Override
+        public void onConnectionStateChange(BluetoothGatt gatt, int status,
+                int newState) {
+            String intentAction;
+            if (newState == BluetoothProfile.STATE_CONNECTED) {
+                intentAction = ACTION_GATT_CONNECTED;
+                mConnectionState = STATE_CONNECTED;
+                broadcastUpdate(intentAction);
+                Log.i(TAG, "Connected to GATT server.");
+                Log.i(TAG, "Attempting to start service discovery:" +
+                        mBluetoothGatt.discoverServices());
+
+            } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                intentAction = ACTION_GATT_DISCONNECTED;
+                mConnectionState = STATE_DISCONNECTED;
+                Log.i(TAG, "Disconnected from GATT server.");
+                broadcastUpdate(intentAction);
+            }
+        }
+
+        @Override
+        // New services discovered
+        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
+            } else {
+                Log.w(TAG, "onServicesDiscovered received: " + status);
+            }
+        }
+
+        @Override
+        // Result of a characteristic read operation
+        public void onCharacteristicRead(BluetoothGatt gatt,
+                BluetoothGattCharacteristic characteristic,
+                int status) {
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
+            }
+        }
+     ...
+    };
+...
+}
+```
+
+当一个特定的回调被触发，它会调用合适的`broadcastUpdate()`方法来传递并将 相应的 action 传递过去：
+
+```java
+private void broadcastUpdate(final String action) {
+    final Intent intent = new Intent(action);
+    sendBroadcast(intent);
+}
+
+private void broadcastUpdate(final String action,
+                             final BluetoothGattCharacteristic characteristic) {
+    final Intent intent = new Intent(action);
+
+    // This is special handling for the Heart Rate Measurement profile. Data
+    // parsing is carried out as per profile specifications.
+    if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
+        int flag = characteristic.getProperties();
+        int format = -1;
+        if ((flag & 0x01) != 0) {
+            format = BluetoothGattCharacteristic.FORMAT_UINT16;
+            Log.d(TAG, "Heart rate format UINT16.");
+        } else {
+            format = BluetoothGattCharacteristic.FORMAT_UINT8;
+            Log.d(TAG, "Heart rate format UINT8.");
+        }
+        final int heartRate = characteristic.getIntValue(format, 1);
+        Log.d(TAG, String.format("Received heart rate: %d", heartRate));
+        intent.putExtra(EXTRA_DATA, String.valueOf(heartRate));
+    } else {
+        // For all other profiles, writes the data formatted in HEX.
+        final byte[] data = characteristic.getValue();
+        if (data != null && data.length > 0) {
+            final StringBuilder stringBuilder = new StringBuilder(data.length);
+            for(byte byteChar : data)
+                stringBuilder.append(String.format("%02X ", byteChar));
+            intent.putExtra(EXTRA_DATA, new String(data) + "\n" +
+                    stringBuilder.toString());
+        }
+    }
+    sendBroadcast(intent);
+}
+```
+
+回到 DeviceControlActivity 中来，传过来的 event 将会被 BroadcastReceiver 所处理：
+
+```java
+// Handles various events fired by the Service.
+// ACTION_GATT_CONNECTED: connected to a GATT server.
+// ACTION_GATT_DISCONNECTED: disconnected from a GATT server.
+// ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.
+// ACTION_DATA_AVAILABLE: received data from the device. This can be a
+// result of read or notification operations.
+private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        final String action = intent.getAction();
+        if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
+            mConnected = true;
+            updateConnectionState(R.string.connected);
+            invalidateOptionsMenu();
+        } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
+            mConnected = false;
+            updateConnectionState(R.string.disconnected);
+            invalidateOptionsMenu();
+            clearUI();
+        } else if (BluetoothLeService.
+                ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
+            // Show all the supported services and characteristics on the
+            // user interface.
+            displayGattServices(mBluetoothLeService.getSupportedGattServices());
+        } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
+            displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+        }
+    }
+};
+```
+
+### 6. 关闭 client app
+一旦完成任务，可以调用下面的 close() 方法来释放资源：
+```java
+public void close() {
+    if (mBluetoothGatt == null) {
+        return;
+    }
+    mBluetoothGatt.close();
+    mBluetoothGatt = null;
+}
+```
