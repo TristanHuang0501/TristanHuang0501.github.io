@@ -1,0 +1,288 @@
+---
+layout:     post
+title:      Android Bluetooth API
+subtitle:   蓝牙的打开、发现、连接与管理
+date:       2018-10-12
+author:     "Tristan"
+header-img: "img/post-bg-androidstudio.jpg"
+catalog:    true
+tags:
+- Android
+- Bluetooth
+---
+
+### 1. Android Bluetooth API
+
+首先，要操作蓝牙，先要在 AndroidMainfest.xml 中加入以下权限：
+```xml
+<uses-permission android:name="android.permission.BLUETOOTH"/>
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+```
+
+- 1st：Allows applications to connect to paired bluetooth devices.
+- 2nd：Allows applications to discover and pair bluetooth devices.
+
+有关蓝牙开发的类主要是在 android.bluetooth 和 android.bluetooth.le 包下，前者适用于 Classic Bluetooth 和 Bluetooth Low Energy (BLE)，而后者只适用于  BLE。
+
+Classic Bluetooth 适用于电池使用强度较大的操作，例如 Android 设备之间的流式传输和通信等。 针对具有低功耗要求的蓝牙设备，Android 4.3（API 级别 18）中引入了面向低功耗蓝牙的 API 支持。
+
+这篇文章主要讲 android.bluetooth，用到的一些类如下，更多类可以参看[传送门](https://developer.android.com/guide/topics/connectivity/bluetooth)。
+
+**BluetoothAdapter**
+
+表示本地蓝牙适配器（蓝牙无线装置）。 BluetoothAdapter 是所有蓝牙交互的入口点。 利用它可以发现其他蓝牙设备，查询绑定（配对）设备的列表，使用已知的 MAC 地址实例化 BluetoothDevice，以及创建 BluetoothServerSocket 以侦听来自其他设备的通信。
+
+**BluetoothDevice**
+
+表示远程蓝牙设备。利用它可以通过 BluetoothSocket 请求与某个远程设备建立连接，或查询有关该设备的信息，例如设备的名称、地址、类和绑定状态等。
+
+**BluetoothSocket**
+
+表示蓝牙套接字接口（与 TCP Socket 相似）。这是允许应用通过 InputStream 和 OutputStream 与其他蓝牙设备交换数据的连接点。
+
+**BluetoothServerSocket**
+
+表示用于侦听传入请求的开放服务器套接字（类似于 TCP ServerSocket）。 要连接两台 Android 设备，其中一台设备必须使用此类开放一个服务器套接字。 当一台远程蓝牙设备向此设备发出连接请求时， BluetoothServerSocket 将会在接受连接后返回已连接的 BluetoothSocket。
+
+### 2. 打开蓝牙
+**第一步：Get a handle to the default local Bluetooth adapter**
+```java
+BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+if (mBluetoothAdapter == null) {
+    // Device does not support Bluetooth
+}
+```
+
+**第二步：Enable it**
+```java
+if (!mBluetoothAdapter.isEnabled()) {
+    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+}
+```
+
+### 3. 查找设备
+设备发现是一个扫描过程，它会搜索局部区域内已启用蓝牙功能的设备，然后请求一些关于各台设备的信息（有时也被称为“发现”、“查询”或“扫描”）。但局部区域内的蓝牙设备仅在其当前已启用可检测性时才会响应发现请求。 如果设备可检测到，它将通过共享一些信息（例如设备名称、类及其唯一 MAC 地址）来响应发现请求。 利用此信息，执行发现的设备可以选择发起到被发现设备的连接。
+
+设备完成配对后，将会保存关于该设备的基本信息（例如设备名称、类和 MAC 地址），并且可使用 Bluetooth API 读取这些信息。 利用远程设备的已知 MAC 地址可随时向其发起连接，而无需执行发现操作（假定该设备处于有效范围内）。
+
+> 被配对与被连接之间存在差别。被配对意味着两台设备知晓彼此的存在，具有可用于身份验证的共享链路密钥，并且能够与彼此建立加密连接。 被连接意味着设备当前共享一个 RFCOMM 通道，并且能够向彼此传输数据。 当前的 Android Bluetooth API 要求对设备进行配对，然后才能建立 RFCOMM 连接。 （在使用 Bluetooth API 发起加密连接时，会自动执行配对）。
+
+#### 3.1 启用可检测性
+默认情况下，设备将变为可检测到并持续 120 秒钟。 您可以通过添加 `EXTRA_DISCOVERABLE_DURATION` Intent Extra 来定义不同的持续时间。 应用可以设置的最大持续时间为 3600 秒，值为 0 则表示设备始终可检测到。 任何小于 0 或大于 3600 的值都会自动设为 120 秒。
+```java
+Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3600);
+startActivity(discoverableIntent);
+```
+
+#### 3.2 发现设备
+调用 `BluetoothAdapter#startDiscovery`
+
+开始发现设备，该进程为异步进程，并且该方法会立即返回一个布尔值，指示是否已成功启动发现操作。 发现进程通常包含约 12 秒钟的查询扫描，之后对每台发现的设备进行页面扫描，以检索其蓝牙名称。
+
+但是当系统发现了设备后，我们得有地方去处理。应用必须针对 `ACTION_FOUND Intent `注册一个 BroadcastReceiver，以便接收每台发现的设备的相关信息。 针对每台设备，系统将会广播 `ACTION_FOUND Intent` 。此 Intent 将携带额外字段 `EXTRA_DEVICE和EXTRA_CLASS`，二者分别包含 BluetoothDevice 和 BluetoothClass。 例如，下面说明了在发现设备时如何注册以处理广播。
+```java
+// Create a BroadcastReceiver for ACTION_FOUND
+private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        // When discovery finds a device
+        if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+            // Get the BluetoothDevice object from the Intent
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            // Add the name and address to an array adapter to show in a ListView
+            mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+        }
+    }
+};
+// Register the BroadcastReceiver
+IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+```
+
+> 注意：执行设备发现对于蓝牙适配器而言是一个非常繁重的操作过程，并且会消耗大量资源。 在找到要连接的设备后，确保始终使用 cancelDiscovery() 停止发现，然后再尝试连接。 此外，如果您已经保持与某台设备的连接，那么执行发现操作可能会大幅减少可用于该连接的带宽，因此不应该在处于连接状态时执行发现操作。
+
+#### 3.3 连接设备
+要在两台设备上的应用之间创建连接，必须同时实现服务器端和客户端机制，因为其中一台设备必须开放服务器套接字，而另一台设备必须发起连接（使用服务器设备的 MAC 地址发起连接）。 当服务器和客户端在同一 RFCOMM 通道上分别拥有已连接的 BluetoothSocket 时，二者将被视为彼此连接。 
+
+> **UUID**
+> 通用唯一标识符 (UUID) 是用于唯一标识信息的字符串 ID 的 128 位标准化格式。 UUID 的特点是其足够庞大，因此您可以选择任意随机值而不会发生冲突。 在此示例中，它被用于唯一标识应用的蓝牙服务。 要获取 UUID 以用于您的应用，您可以使用网络上的众多随机 UUID 生成器之一，然后使用 fromString(String) 初始化一个 UUID。
+
+##### 3.3.1 服务器端连接
+下面是设置服务器套接字并接受连接的基本过程：
+1. 通过 `BluetoothAdapter#listenUsingRfcommWithServiceRecord(String UUID)` 获取 `BluetoothServerSocket` 该字符串是您的服务的可识别名称，系统会自动将其写入到设备上的新服务发现协议 (SDP) 数据库条目（可使用任意名称，也可直接使用您的应用名称）。 UUID 也包含在 SDP 条目中，并且将作为与客户端设备的连接协议的基础。 也就是说，当客户端尝试连接此设备时，它会携带能够唯一标识其想要连接的服务的 UUID。 **两个 UUID 必须匹配，在下一步中，连接才会被接受。 **
+2. 通过调用 `BluetoothServerSocket#accept()` 开始侦听连接请求 这是一个阻塞调用。它将在连接被接受或发生异常时返回。 仅当远程设备发送的连接请求中所包含的 UUID 与向此侦听服务器套接字注册的 UUID 相匹配时，连接才会被接受。 操作成功后，accept() 将会返回已连接的 BluetoothSocket。
+3. 除非您想要接受更多连接，否则请调用 `BluetoothServerSocket#close` 这将释放服务器套接字及其所有资源，但不会关闭 accept() 所返回的已连接的 BluetoothSocket。 与 TCP/IP 不同，RFCOMM 一次只允许每个通道有一个已连接的客户端，因此大多数情况下，在接受已连接的套接字后立即在 BluetoothServerSocket 上调用 close() 是行得通的。
+
+> accept() 调用不应在主 Activity UI 线程中执行，因为它是阻塞调用，并会阻止与应用的任何其他交互。 在您的应用所管理的新线程中使用 BluetoothServerSocket 或 BluetoothSocket 完成所有工作，这通常是一种行之有效的做法。 要终止 accept() 等被阻塞的调用，请通过另一个线程在 BluetoothServerSocket（或 BluetoothSocket）上调用 close()，被阻塞的调用将会立即返回。 请注意，BluetoothServerSocket 或 BluetoothSocket 中的所有方法都是线程安全的方法。::
+
+以下是一个用于接受传入连接的服务器组件的简化线程：
+
+！！mark 一下这种将临时对象赋给 final 对象的手法
+```java
+private class AcceptThread extends Thread {
+    private final BluetoothServerSocket mmServerSocket;
+
+    public AcceptThread() {
+        // Use a temporary object that is later assigned to mmServerSocket,
+        // because mmServerSocket is final
+        BluetoothServerSocket tmp = null;
+        try {
+            // MY_UUID is the app's UUID string, also used by the client code
+            tmp = mBluetoothAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
+        } catch (IOException e) { }
+        mmServerSocket = tmp;
+    }
+
+    public void run() {
+        BluetoothSocket socket = null;
+        // Keep listening until exception occurs or a socket is returned
+        while (true) {
+            try {
+                socket = mmServerSocket.accept();
+            } catch (IOException e) {
+                break;
+            }
+            // If a connection was accepted
+            if (socket != null) {
+                // Do work to manage the connection (in a separate thread)
+                manageConnectedSocket(socket);
+                mmServerSocket.close();
+                break;
+            }
+        }
+    }
+
+    /** Will cancel the listening socket, and cause the thread to finish */
+    public void cancel() {
+        try {
+            mmServerSocket.close();
+        } catch (IOException e) { }
+    }
+}
+```
+`manageConnectedSocket()` 是应用中的虚构方法，它将启动用于传输数据的线程，在有关[管理连接](https://developer.android.com/guide/topics/connectivity/bluetooth#ManagingAConnection)的部分将会讨论这一主题。
+
+##### 3.3.2 客户端的连接
+要发起与远程设备（保持开放的服务器套接字的设备）的连接，必须首先获取表示该远程设备的 BluetoothDevice 对象。（在前面有关查找设备的部分介绍了如何获取 BluetoothDevice）。 然后必须使用 BluetoothDevice 来获取 BluetoothSocket 并发起连接。过程主要是：
+1. 调用`BluetoothDevice#createRfcommSocketToServiceRecord(UUID)` 获取 BluetoothSocket。 要使用相同的 UUID，只需将该 UUID 字符串以硬编码方式编入应用，然后通过服务器代码和客户端代码引用该字符串。
+2. 通过调用 `BluetoothSocket#connect`发起连接。  此方法为阻塞调用。 如果由于任何原因连接失败或 connect() 方法超时（大约 12 秒之后），它将会引发异常。由于 connect() 为阻塞调用，因此该连接过程应始终在主 Activity 线程以外的线程中执行。 
+
+> 注：在调用 connect() 时，应始终确保设备未在执行设备发现。 如果正在进行发现操作，则会大幅降低连接尝试的速度，并增加连接失败的可能性。
+
+以下是发起蓝牙连接的线程的基本示例：
+```java
+private class ConnectThread extends Thread {
+    private final BluetoothSocket mmSocket;
+    private final BluetoothDevice mmDevice;
+
+    public ConnectThread(BluetoothDevice device) {
+        // Use a temporary object that is later assigned to mmSocket,
+        // because mmSocket is final
+        BluetoothSocket tmp = null;
+        mmDevice = device;
+
+        // Get a BluetoothSocket to connect with the given BluetoothDevice
+        try {
+            // MY_UUID is the app's UUID string, also used by the server code
+            tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
+        } catch (IOException e) { }
+        mmSocket = tmp;
+    }
+
+    public void run() {
+        // Cancel discovery because it will slow down the connection
+        mBluetoothAdapter.cancelDiscovery();
+
+        try {
+            // Connect the device through the socket. This will block
+            // until it succeeds or throws an exception
+            mmSocket.connect();
+        } catch (IOException connectException) {
+            // Unable to connect; close the socket and get out
+            try {
+                mmSocket.close();
+            } catch (IOException closeException) { }
+            return;
+        }
+
+        // Do work to manage the connection (in a separate thread)
+        manageConnectedSocket(mmSocket);
+    }
+
+    /** Will cancel an in-progress connection, and close the socket */
+    public void cancel() {
+        try {
+            mmSocket.close();
+        } catch (IOException e) { }
+    }
+}
+```
+
+### 5. 管理连接
+在成功连接两台（或更多台）设备后，每台设备都会有一个已连接的 BluetoothSocket。 这一点非常有趣，因为这表示您可以在设备之间共享数据。 利用 BluetoothSocket，传输任意数据的一般过程非常简单：
+
+- 获取 InputStream 和 OutputStream，二者分别通过套接字以及 `getInputStream()` 和 `getOutputStream()` 来处理数据传输。
+- 使用 `read(byte[])` 和 `write(byte[])` 读取数据并写入到流式传输。
+就这么简单。
+
+> **mark 一下这里读放入线程的主路，而写则由主线程单独调用的操作**
+>
+> 当然，还需要考虑实现细节。首要的是，应该为所有流式传输读取和写入操作使用专门的线程。 这一点很重要，因为 `read(byte[])` 和 `write(byte[])` 方法都是阻塞调用。`read(byte[])` 将会阻塞，直至从流式传输中读取内容。`write(byte[]) `通常不会阻塞，但如果远程设备没有足够快地调用 `read(byte[])`，并且中间缓冲区已满，则其可能会保持阻塞状态以实现流量控制。因此，线程中的主循环应专门用于读取 InputStream。 可使用线程中单独的公共方法来发起对 OutputStream 的写入操作。
+
+```java
+private class ConnectedThread extends Thread {
+    private final BluetoothSocket mmSocket;
+    private final InputStream mmInStream;
+    private final OutputStream mmOutStream;
+
+    public ConnectedThread(BluetoothSocket socket) {
+        mmSocket = socket;
+        InputStream tmpIn = null;
+        OutputStream tmpOut = null;
+
+        // Get the input and output streams, using temp objects because
+        // member streams are final
+        try {
+            tmpIn = socket.getInputStream();
+            tmpOut = socket.getOutputStream();
+        } catch (IOException e) { }
+
+        mmInStream = tmpIn;
+        mmOutStream = tmpOut;
+    }
+
+    public void run() {
+        byte[] buffer = new byte[1024];  // buffer store for the stream
+        int bytes; // bytes returned from read()
+
+        // Keep listening to the InputStream until an exception occurs
+        while (true) {
+            try {
+                // Read from the InputStream
+                bytes = mmInStream.read(buffer);
+                // Send the obtained bytes to the UI activity
+                mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
+                        .sendToTarget();
+            } catch (IOException e) {
+                break;
+            }
+        }
+    }
+
+    /* Call this from the main activity to send data to the remote device */
+    public void write(byte[] bytes) {
+        try {
+            mmOutStream.write(bytes);
+        } catch (IOException e) { }
+    }
+
+    /* Call this from the main activity to shutdown the connection */
+    public void cancel() {
+        try {
+            mmSocket.close();
+        } catch (IOException e) { }
+    }
+}
+```
