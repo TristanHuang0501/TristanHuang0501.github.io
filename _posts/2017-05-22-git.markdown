@@ -63,6 +63,11 @@ $ git push -u origin master
 ```
  第一次要使用`-u`参数，可以将本地的master分支与远程的master分支关联，后面再推送就可以直接`git push`或者`git push origin master`了
 
+4. 查看远程仓库的 URL 信息：
+```
+$ git remote -v | --verbose
+```
+
 ------
 
 ### 4. 版本管理
