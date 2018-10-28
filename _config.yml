@@ -71,7 +71,7 @@ ga_domain: tristanhuang0501.github.com
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，看书吉他，<br>子路问津，上下求索"
+sidebar-about-description: "温良恭俭，当仁不让"
 sidebar-avatar: /img/tristan.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
