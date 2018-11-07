@@ -129,6 +129,7 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 ![Alt text](http://oqcr9s3uf.bkt.clouddn.com/post-mt-log.png)
 
 
+
 ### 5. Git图形化工具
 1. **Git for windows:：**下载git就会有的，包括git bash和git GUI两部分
 2. **Github desktop：** github出的图形化工具，但支持GitHub网站托管

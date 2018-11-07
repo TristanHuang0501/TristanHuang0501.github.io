@@ -97,6 +97,20 @@ This Alfred.app workflow for macOS makes it easy for the user to set the current
 
 挺好用的，可以弃掉欧路词典的全局快捷键了感觉，哈哈，实在不行才 alfred 打开欧路好了。这个 workflow 是用的有道智云的 NLP 应用，需要注册一下，不过也挺简单的。好用。
 
+#### [印象笔记/evernote](https://www.zhihu.com/question/28011717/answer/140638646)
+
+获取你的印象账号所对应的 [Dev Tokens](http://dev.evernote.com/doc/articles/dev_tokens.php)，然后键入 es-token ，完成配置，然后就可以正常使用这个 workflow 了。
+
+![](https://ws4.sinaimg.cn/large/006tNbRwly1fwzyokrccdj30vo0fmjw4.jpg)
+
+现在 Dev Token 国际版是可以正常开启的，但是国内印象笔记被关闭了，如果你点开上面的网站会显示这样的结果：
+
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fwwf11gqfsj31fo0pmdib.jpg)
+
+包括一些同学用 sublime 去访问印象笔记也由于 token 失效会无法用，此时需要我们手动去申请，按照[创建页面失效的解决办法](http://www.biliyu.com/article/1799.html)提供的方法，印象笔记会立刻给你发送邮件的，然后会给你开启获取 token 的权限：
+
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fwwf42oiwdj314i0c6aaw.jpg)
+
 
 
 --------------------------------------------------

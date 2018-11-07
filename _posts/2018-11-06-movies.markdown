@@ -1,0 +1,455 @@
+---
+layout:     post
+title:      我的观影编年史
+subtitle:   记录这些年看的电影
+date:       2018-10-28
+author:     "Tristan"
+header-img: "img/post-bg-caolou.jpg"
+catalog:    true
+tags:
+- Movie
+---
+
+忽然突发奇想，想以编年的形式记录下这些年看的片儿，也算是做个记录吧，仅标明片名和观看次数，会时常更新的。
+
+关于**时间**标注：一开始是按照日记中的检索出来的顺序写，老电影时间上没问题，最近几年的去电影院看的发现有些国内外的上映时间不一样，我就尽量以自己看的时间为准，否则就以豆瓣中标的时间为准。
+
+关于**次数**标注：列出来的都是至少完整看过一遍，记得剧情或者一些重要的片段的。有一些看的零零碎碎的就算了，比如说小时候常在电影频道看到的卓别林的默片，还有像《纵横四海》这样的港片什么的，都没有列。另外次数上，按可以回忆地起来的完整的阅片次数算，有的电影像《阿甘正传》，感觉上觉得都看了无数遍了，但可能后面经常是再回看某一段了，所以这里就以最低次数计个4次这样。下面列的电影如果后面再看会记得更新次数的，也算是对自己的一个记录，当然也新发现了好多关于电影的有意思的事情。
+
+#### reply, 2018
+
+- 1《江湖儿女》
+- 1《我不是药神》
+- 1《复仇者联盟3：无限战争》
+- 1~~《古墓丽影：源起之战》~~
+- 1~~《捉妖记2》~~
+- 1《黑豹/Black Panther》
+- 1《蚁人2：黄蜂女现身/Ant-man and the Wasp》
+- 1《后来的我们/Us and Them》
+- 1~~《超时空同居/How Long Will I Love U》~~
+- 1~~《勇敢者游戏/Jumanji: Welcom to the Jungle》~~
+- 1~~《一出好戏》~~
+- 1~~《西虹市首富》~~
+- 1《头号玩家/Ready Player One》
+- 1《唐人街探案2》
+
+
+
+#### reply, 2017
+
+- 1《战狼2》
+- 1~~《天才枪手》~~
+- 1~~《相亲相爱》~~
+- 1《芳华/Youth》
+- 1《乘风破浪》
+- 1~~《羞羞的铁拳》~~
+- 1~~《解忧杂货店/Miracles of the Namiya General Store》~~
+- 1~~《前任3：再见前任》~~
+- 1《金刚狼3：殊死一战》
+- 1《神秘巨星/Secret Superstar》
+- 1~~《金刚：骷髅岛/Kong: Skull Island》~~
+- 1《寻梦环游记/Coco》
+- 1《蜘蛛侠：英雄归来》
+- 1《敦刻尔克》
+- 1~~《妖猫传》~~
+- 1《变形金刚5：最后的骑士》
+
+#### reply, 2016
+
+- 1《摔跤吧！爸爸》
+- 1《荒野猎人/The Revenant》
+- 1《湄公河行动》
+- 1《七月与安生》
+- 1《奇异博士》
+- 1《X 战警：天启》
+- 1《美国队长3》
+- 1《大鱼海棠》
+- 1《魔兽》
+- 1~~《美人鱼》~~
+- 1《疯狂动物城》
+
+#### reply, 2015
+
+- 1《铜牌巨星/The Bronze》
+- 1~~《巴霍巴利王：开端/Baahubali: The Beginning》~~
+- 1《终结者：创世纪/Terminator Genisys》
+- 1《刺客聂隐娘/The Assassin》
+- 1《蚁人/Antman》
+- 1《碟中谍5：神秘国度/Mission: Impossible》
+- 1《小黄人大眼萌/Minions》
+- 1《复仇者联盟2：奥创纪元/Avengers: Age of Ultron》
+- 1《夏洛特烦恼》
+- 1《港囧》
+- 1~~《老炮儿》~~
+- 1《寻龙诀》
+- 1《破风》
+- 1《狼图腾》
+- 1《疯狂的麦克斯：狂暴之路/Mad Max: Fury Road》
+- 1《星球大战7：原力觉醒/Star Wars: The Force Avakens》
+- 1《垫底辣妹》
+ 
+#### reply, 2014
+
+- 1《后会无期》
+- 2《星际穿越/Interstellar》
+- 1《归来》
+- 1《老男孩之猛龙过江》
+- 1《智取威虎山》
+- 1《X 战警：逆转未来》
+- 2《变形金刚4：绝迹重生/Transformers: Age of Extinction》
+- 1《猩球崛起：黎明之战/Dawn of the Planet of the Apes》
+- 1《敢死队3》
+- 1《爆裂鼓手/Whiplash》
+- 1《霍比特人：五军之战/The Hobbit: The Battle of the Five Armies》
+- 1《心花路放》
+- 1《超体 Lucy》
+
+#### reply, 2013
+
+- 1《冰雪奇缘/Frozen》
+- 1《全民目击/Silent Witness》
+- 1《西游·降魔篇》
+- 1《北京遇上西雅图》
+- 2《致我们终将逝去的青春》
+- 1~~《狄仁杰之神都龙王》~~
+- 1《扫毒》
+- 1《私人订制》
+- 1《钢铁侠3》
+- 1《金刚狼2》
+- 1《为奴十二年》
+- 1《霍比特人：史矛革之战》
+- 1《白日梦想家》
+- 2《雪国列车》
+- 1《言叶之庭》
+
+#### reply, 2012
+
+- 1《人再囧途之泰囧》
+- 1《金陵十三钗》
+- 1~~《地心历险记2：神秘岛》~~
+- 1《复仇者联盟》
+- 1《云图/Cloud Atlas》
+- 2《少年派的奇幻漂流/Life of Pi》
+- 1《霍比特人：意外旅程》
+
+#### reply, 2011
+
+- 1《战马/War Horse》
+- 1《源代码/Source Code》
+- 1《万有引力》
+- 1《钢的琴》
+- 2《失恋33天》
+- 1《国王的演讲/The King's Speech》
+- 1《兰戈》
+- 1《雷神索尔》
+- 1《功夫熊猫2》
+- 1《X 战警：第一战》
+- 1《变形金刚3：黑暗之月/Transformers: Dark of the Moon》
+- 1《猩球崛起/Rise of the Planet of the Apes》
+- 1《铁甲钢拳/Real Steel》
+- 1《阳光姐妹淘》
+
+#### reply, 2010
+
+- 1《初恋这件小事》
+- 1《驯龙高手/How to Train Your Dragon》
+- 1《赵氏孤儿》
+- 1《盗梦空间/Inception》
+- 1《杜拉拉升职记》
+- 2《山楂树之恋》
+- 1《剑雨》
+- 1《志明与春娇》
+- 1《诸神之战》
+- 2《钢铁侠2》
+
+#### reply, 2009
+
+- 2《三傻大闹宝莱坞/3 Idiots》
+- 1《阿凡达/Avatar》
+- 2《疯狂的赛车》
+- 2《建国大业》
+- ~~1《街头霸王：春丽传奇》~~
+- 1《X 战警前传：金刚狼》
+- 1《飞屋环游记》
+- 2《变形金刚2/Transformers: Revenge of the Fallen》
+
+#### reply, 2008
+
+- 1《老爷车/Gran Torino》
+- 1《机器人总动员/WALL·E》
+- 3《非常主播/Speeding Scandal》
+- 1《非诚勿扰》
+- 1《长江7号》
+- 1《悬崖上的金鱼公主》
+- 1《嫌疑犯 X 的献身》
+- 1《决胜21点》
+- 1《纳尼亚传奇：凯斯宾王子》
+- 1《全民英雄汉考克》
+- 2《钢铁侠》
+- 1《功夫熊猫》
+- 2《当幸福来敲门》
+
+#### reply, 2007
+
+- 2《这个男人来自地球/The Man from Earth》
+- 2《贝奥武夫/Beowulf》
+- 2《变形金刚/Transformers》
+- 1《八月迷情/August Rush》
+- 1《遗愿清单》
+
+#### reply, 2006
+
+- 1《疯狂的石头》
+- 1《霍元甲》
+- 1《龙虎门》
+- 1《云水谣》
+- 1《满城尽带黄金甲》
+- 1《加勒比海盗2：聚魂棺/Pirates of the Caribbean: Dead Man's Chest》
+- 1《碟中谍2》
+- 1《父辈的旗帜/Flags of Our Fathers》
+
+#### reply, 2005
+
+- 1《星球大战前传3：西斯的复仇/Revenge of the Sith》
+- 1《傲慢与偏见/Pride & Prejudice》
+- 1《V字仇杀队/V for Vendetta》
+- 1《金刚/King Kong》
+- 1《喜马拉雅星》
+- 1《七剑》
+- 1《神话》
+- 1《无极》
+- 1~~《情癫大圣》~~
+- 1《太行山上》
+- 2《查理与巧克力工厂》
+- 1《纳尼亚传奇：狮子·女巫·魔衣橱》
+
+#### reply, 2004
+
+- 2《放牛班的春天/The Chorus》
+- 1《花好月圆》
+- 2《功夫》
+- 1《恋恋笔记本》
+- 1《哈利波特与阿兹卡班的囚徒》
+
+#### reply, 2003
+
+- 2《老男孩/Old Boy》
+- 3《假如爱有天意/The Classic》
+- 2《海底总动员/Finding Nemo》
+- 1~~《千机变》~~
+- 2《无间道2》
+- 2《无间道3终极无间》
+- 1《黑客帝国2：重装上阵/The Matrix Reloaded》
+- 2《指环王3：王者归来/The Lord of the Rings: The Return of the King》
+
+#### reply, 2002
+
+- 1《星球大战前传2：克隆人的进攻/Attack of the Clones》
+- 2《指环王2：双塔奇兵/The Lord of the Rings: The Two Towers》
+- 2《无间道》
+- 1《天下无双》
+- 1《蝴蝶/Le papillon》
+
+#### reply, 2001
+
+- 3《我的野蛮女友》
+- 2《指环王1：魔戒再现/The Lord of the Rings: The Fellowship of the Ring》
+- 1《钟无艳》
+- 2《瘦身男女》
+- 1《蜀山传》
+- 1《千与千寻》
+- 1《紫日》
+- 2《美丽心灵》
+- 1《天使爱美丽/Amelie》
+
+#### reply, 1999
+
+- 2《黑客帝国/The Matrix》
+- 1《喜剧之王》
+- 1《千王之王2000》
+- 1《星球大战前传1：幽灵的威胁/The Phantom Menace》
+- 1《搏击俱乐部》
+- 1《十月的天空》
+- 1《机器管家/Bicentennial Man》
+
+#### reply, 1998
+
+- 2《楚门的世界/The Truman Show》
+- 1《两杆大烟枪/Lock, Stock and Two Somking Barrels》
+- 1《海上钢琴师》
+- 1《拯救大兵瑞恩/Saving Private Ryan》
+
+#### reply, 1997
+
+- 2《泰坦尼克号/Titanic》
+- 1《黄飞鸿之西域雄狮》
+
+#### reply, 1997
+
+- 1《美丽人生》
+- 1《一个字头的诞生》
+- 2《小鞋子/Children of Heaven》
+
+#### reply, 1996
+
+- 1~~《大内密探零零发》~~
+- 1《独立日》
+
+#### reply, 1995
+
+- 1《七宗罪》
+- 1《廊桥遗梦/The Bridges of Madison County》
+- 1《情书/Letters of Love》
+- 2《大话西游之月光宝盒》
+- 2《勇敢的心/Braveheart》
+- 2《西游记之月光宝盒》
+- 2《西游记大结局之仙履奇缘》
+- 1《玩具总动员》
+- 1《永远的蝙蝠侠》
+
+#### reply, 1994
+
+- 2《燃情岁月/Legends of the Fall》
+- 1《这个杀手不太冷/Leon》
+- 4《阿甘正传/Forrest Gump》
+- 3《肖申克的救赎/The Shawshank Redemption》
+- 1《六指琴魔》
+- 1《破坏之王》
+- 1《新天龙八部之天山童姥》
+- 2《九品芝麻官》
+- 1《东邪西毒》
+- 1《国产凌凌漆》
+- 1《精武英雄》
+
+#### reply, 1993
+
+- 2《土拨鼠之日/Groundhog Day》
+- 3《辛德勒的名单/Schindler's List》
+- 1《霸王别姬》
+- 1《射雕英雄传之东成西就》
+- 1《黄飞鸿之三狮王争霸》
+- 1《黄飞鸿之铁鸡斗蜈蚣》
+- 2《唐伯虎点秋香》
+- 1《济公》
+- 2《倚天屠龙记之魔教教主》
+- 1《青蛇》
+
+#### reply, 1992
+
+- 2《情人/L'amant》
+- 1《闻香识女人/Scent of a Woman》
+- 1《笑傲江湖II东方不败》
+- 1《鹿鼎记II神龙教》
+
+#### reply, 1991
+
+- 1《岁月的童话》
+- 1《终结者2：审判日/Terminator 2: Judgment Day》
+- 1《龙的传人》
+- 1《黄飞鸿》
+- 1《沉默的羔羊》
+
+#### reply, 1990
+
+- 1《教父3》
+- 2《与狼共舞/Dances with Wolves》
+- 1《剪刀手爱德华/Edward Scissorhands》
+- 1《倩女幽魂II人间道》
+- 1《无敌幸运星》
+- 1《赌侠》
+
+#### reply, 1989
+
+- 2《赌神》
+
+#### reply, 1988
+
+- 2《天堂电影院/Cinema Paradiso》
+- 1《雨人》
+
+#### reply, 1987
+
+- 2《太阳帝国/Empire of the Sun》
+
+#### reply, 1986
+
+- 2《天空之城/Laputa：Castle in the sky》
+
+#### reply, 1984
+
+- 2《美国往事/Once Upon a Time in America》
+- 1《终结者》
+
+#### reply, 1983
+
+- 1《星球大战3：绝地归来/Return of the Jedi》
+
+#### reply, 1982
+
+- 1《E.T.外星人/E.T.: The Extra-Terrestrial》
+- 1《银翼杀手》
+
+#### reply, 1980
+
+- 1《星球大战2：帝国反击战/The Empire Strikes Back》
+
+#### reply, 1977
+
+- 2《星球大战/Star Wars》
+
+#### reply, 1975
+
+- 1《飞越疯人院》
+
+#### reply, 1974
+
+- 2《教父2/The Godfather: Part Ⅱ》
+
+#### reply, 1972
+
+- 2《教父/The Godfather》
+
+#### reply, 1968
+
+- 2《雾都孤儿/Oliver!》
+- 1《黄色潜水艇/Yellow Submarine》
+
+#### reply, 1965
+
+- 2《音乐之声/The Sound of Music》
+
+#### reply, 1964
+
+- 1《荒野大镖客/For a Fistful of Dollars》
+
+#### reply, 1961
+
+- 1《蒂凡尼的早餐/Breakfast at Tiffany's》
+
+#### reply, 1957
+
+- 2《十二怒汉/12 Angry Men》
+
+#### reply, 1953
+
+- 1《罗马假日》
+
+#### reply, 1952
+
+- 2《雨中曲/Singin' in the Rain》
+
+#### reply, 1942
+
+- 1《卡萨布兰卡/Casablanca》
+
+#### reply, 1940
+
+- 1《魂断蓝桥/Waterloo Bridge》
+
+#### reply, 1939
+
+- 1《乱世佳人/Gone with the Wind》
+
+#### reply, 1930
+
+- 1《西线无战事/All Quiet on the Western Front》
