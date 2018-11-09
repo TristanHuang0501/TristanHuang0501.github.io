@@ -1,13 +1,13 @@
 ---
 layout:     post
-title:      "git - 理解Ta，爱Ta"
-subtitle:   知识回顾和资源整理
+title:      Git - 理解Ta，爱Ta（1）
+subtitle:   刚上手 Git 需要知道什么
 date:       2017-05-22
 author:     "Tristan"
 header-img: "img/post-bg-git.png"
 catalog:    true
 tags:
-- git
+- Git
 ---
 
 
