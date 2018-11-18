@@ -66,6 +66,7 @@ tags:
 - 1《大鱼海棠》
 - 1《魔兽》
 - 1~~《美人鱼》~~
+- 1《我不是潘金莲》
 - 1《疯狂动物城》
 
 #### reply, 2015
@@ -214,7 +215,7 @@ tags:
 - 1《傲慢与偏见/Pride & Prejudice》
 - 1《V字仇杀队/V for Vendetta》
 - 1《金刚/King Kong》
-- 1《喜马拉雅星》
+- 1~~《喜马拉雅星》~~
 - 1《七剑》
 - 1《神话》
 - 1《无极》
@@ -222,6 +223,7 @@ tags:
 - 1《太行山上》
 - 2《查理与巧克力工厂》
 - 1《纳尼亚传奇：狮子·女巫·魔衣橱》
+- 1《银河系漫游指南/The Hitchhiker's Guide to the Galaxy》
 
 #### reply, 2004
 
@@ -367,6 +369,7 @@ tags:
 - 2《天堂电影院/Cinema Paradiso》
 - 1《雨人》
 
+
 #### reply, 1987
 
 - 2《太阳帝国/Empire of the Sun》
@@ -432,7 +435,7 @@ tags:
 
 #### reply, 1953
 
-- 1《罗马假日》
+- 1《罗马假日/Roman Holiday》
 
 #### reply, 1952
 
