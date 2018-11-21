@@ -13,40 +13,41 @@ header-img: "img/post-bg-alitrip.jpg"
 
 <!-- Chinese Version -->
 <div class="zh post-container">
-
-    <!--copied from markdown -->
-    <blockquote>行难必有所得，行易必有所费</blockquote>
-
-    <p>Hey，我是<strong>Tristan</strong>，图上大树下的就是我</p>
-
-    <h5>我所相信的：</h5>
-    <p>行难必有所得，行易必有所废</p>
-
-    <h5>我所警戒的：</h5>
-    <p>少说虚话、气话、啰嗦话，</br>多做实事、正事、要紧事。
-    </p>
-
-    <h5>想要对我说：</h5>
-    <p>
-        <a href="mailto:name@email.com">mail to me ~</a>
-    </p>
-
-
+    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
 </div>
 
 <!-- English Version -->
 <div class="en post-container">
-    <blockquote><p>Yet another Web Developer. <br>
-    Yet another Life-long Designer.</p></blockquote>
-
-    <p>Hi, I am <strong>Huang MeiChuan(Tristan)</strong>，you can call me <strong>Tristan</strong>. I'm an Student &amp; a Engineer in the future.</p>
-
-    <h5>Talks</h5>
-
-    <ul>
-    <li><a href="//blog.csdn.net/h_meichuan">CSDN blog website</a></li>
-    </ul>
+    {% capture about_en %}{% include about/en.md %}{% endcapture %}
+    {{ about_en | markdownify }}
 </div>
+
+
+{% if site.disqus_username %}
+<!-- disqus 评论框 start -->
+<div class="comment">
+    <div id="disqus_thread" class="disqus-thread">
+
+    </div>
+</div>
+<!-- disqus 评论框 end -->
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "{{site.disqus_username}}";
+    var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
+    var disqus_url = "{{site.url}}{{page.url}}";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+{% endif %}
+
 
 <!-- Handle Language Change -->
 <script type="text/javascript">
