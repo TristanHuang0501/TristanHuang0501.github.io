@@ -66,8 +66,9 @@ tags:
 - 1《大鱼海棠》
 - 1《魔兽》
 - 1~~《美人鱼》~~
-- 1《我不是潘金莲》
+- 1~~《我不是潘金莲》~~
 - 1《疯狂动物城》
+- 1《神奇动物在哪里/Fantastic Beasts and Where to Find Them》
 
 #### reply, 2015
 
@@ -88,6 +89,7 @@ tags:
 - 1《疯狂的麦克斯：狂暴之路/Mad Max: Fury Road》
 - 1《星球大战7：原力觉醒/Star Wars: The Force Avakens》
 - 1《垫底辣妹》
+- 1《年轻气盛/Youth》
  
 #### reply, 2014
 
