@@ -1,20 +1,22 @@
 # Site settings
 title: Tristan Blog
-SEOTitle: 美川的博客 | Tristan Blog
+SEOTitle: 黄美川的博客 | Tristan Blog
 header-img: img/home-bg.jpg
-email: TristanHuang0501@gmail.com
+email: 417519961@qq.com
 description: "子路问津 | 黄美川, tirstanhuang | 这里是 @TristanHuang0501 黄美川 的个人博客，与你一起发现更大的世界。"
-keyword: "黄美川, tristanhuang, 黄美川的博客, tristan Blog, 博客, 个人网站, 互联网"
+keyword: "黄美川, 西镜, tristanhuang, 黄美川的博客, tristan Blog, 博客, Java, 个人网站, 互联网"
 url: "http://TristanHuang0501.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
+# Publish posts or collection documents with a future date.
+future: true
 
 # SNS settings
 RSS: false
-weibo_username:     false
+weibo_username:     大青山上藏西镜
 zhihu_username:     mei-chuan-huang
 github_username:    TristanHuang0501
-twitter_username:   false
+# twitter_username:   false
 facebook_username:  tristanhuang0501
 csdn_username:  h_meichuan
 #linkedin_username:  firstname-lastname-idxxxx
@@ -23,18 +25,23 @@ csdn_username:  h_meichuan
 
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+highlighter: rouge
 permalink: pretty
 paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-
+# If you have timezone issue (e.g. #68) in China, uncomment to use this:
+#timezone: CN 
 
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems:
-  - jekyll-paginate
-  - jemoji
+# make sure you have this gem installed
+# `$ gem install jekyll-paginate`
+# gems:
+#   - jekyll-paginate
+#   - jemoji
+plugins: [jekyll-paginate, jemoji]
 
 
 
@@ -42,14 +49,19 @@ gems:
 # replace redcarpet to kramdown,
 # although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
 # document: http://jekyllrb.com/docs/configuration/#kramdown
-highlighter: rouge
 markdown: kramdown
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
   syntax_highlighter: rouge
+  # syntax_highlighter_opts:
+  #   span:
+  #     line_numbers: false
+  #   block:
+  #     line_numbers: true
+  #     start_line: 1
 
 # Disqus settings
-#disqus_username: _your_disqus_short_name_
+# disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
 duoshuo_username: tristanhuang
@@ -86,7 +98,8 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 chrome-tab-theme-color: "#000000"
 service-worker: true
 
-
+# MathJax rendering for layout:page (e.g. post preview)
+page-mathjax: false
 
 # Friends
 friends: [
