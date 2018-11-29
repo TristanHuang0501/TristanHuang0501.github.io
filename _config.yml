@@ -51,8 +51,14 @@ plugins: [jekyll-paginate, jemoji]
 # document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
-  # syntax_highlighter: rouge
+  input: GFM
+  hard_wrap: true                # use Github Flavored Markdown !important
+  extensions:
+    - autolink
+    - footnotes
+    - smart
+  enable_coderay: true
+  syntax_highlighter: rouge
   syntax_highlighter_opts:
     span:
       line_numbers: false
