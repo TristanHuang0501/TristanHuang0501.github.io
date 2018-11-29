@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      分布式原理-CAP
-subtitle:   我喜欢的 workflow 整理 
+title:      分布式原理（2）
+subtitle:   CAP 定理
 date:       2018-10-27
 author:     "Tristan"
 header-img: "img/post-bg-androidstudio.jpg"
@@ -83,5 +83,9 @@ Paxos、Raft 等共识算法，主要处理这种情况。在 Paxos 类算法中
 
 ### 4. CAP 原理实例推导
 后面学习[网络编程（七）：CAP原理推导和应用](https://zhuanlan.zhihu.com/p/20399316)来补充相关的知识
+
+!!! https://blog.csdn.net/dellme99/article/details/15340955 根据这篇文章补充一下
+
+
 
 [^1]:Nancy Lynch and Seth Gilbert, “Brewer's conjecture and the feasibility of consistent, available, partition-tolerant web services” 互联网档案馆的存档，存档日期2008-09-08., ACM SIGACT News, Volume 33 Issue 2 (2002), pg. 51-59.
