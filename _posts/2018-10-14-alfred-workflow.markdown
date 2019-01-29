@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      打造你的 Alfred 神器
+title:      打造你的 Alfred 神器（1）
 subtitle:   我喜欢的 workflow 整理 
 date:       2018-10-13
 author:     "Tristan"

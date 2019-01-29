@@ -137,7 +137,11 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 4. **Gitkraken：**我用的就是这个，感觉挺酷的(不过现在觉得命令行最酷~~)，对个人使用时免费的，用学校邮箱向github申请学生开发大礼包，可以升级到pro版
 
 
-### 6. 其他资源
+### 6. .gitignore 文件
+根据具体项目的需要，我们有时候需要屏蔽一些文件，这个时候需要为整个项目创建 `.gitignore`文件，这里我们利用 [.gitignore 生成工具](https://www.codingsky.com/gitignore)，可以直接生成。
+
+
+### 7. 其他资源
 1. [shortcutfoo](https://www.shortcutfoo.com/)：这个网站可以练快捷键和命令行操作，除了git的，还能练vim、sublime、linux、Emacs等好多的快捷键
 2. [learnGitBranching](http://learngitbranching.js.org/)：左边敲指令，右边能图形化地显示逻辑，挺好的
 3. [Git Tutorial](https://try.github.io/levels/1/challenges/2)：这个和上面类似，所不同的是这个输完指令后，显示的是`.git`文件夹里的文件的变化，也是挺好的
