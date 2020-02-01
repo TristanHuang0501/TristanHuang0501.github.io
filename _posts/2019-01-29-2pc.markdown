@@ -1,0 +1,16 @@
+---
+layout:     post
+title:      分布式原理（3）
+subtitle:   2PC 协议
+date:       2019-01-29
+author:     "Tristan"
+header-img: "img/post-bg-androidstudio.jpg"
+catalog:    true
+tags:
+- Distribution System
+---
+
+> https://juejin.im/post/5b2664446fb9a00e4a53136e
+
+由于 Base 理论需要在一致性和可用性方面做出权衡，因此涌现了很多关于一致性的算法和协议。其中比较著名的有二阶段提交协议（2 Phase Commitment Protocol），三阶段提交协议（3 Phase Commitment Protocol）和 Paxos 算法。本文这里要介绍的是二阶段提交协议，即 2PC 协议。
+
